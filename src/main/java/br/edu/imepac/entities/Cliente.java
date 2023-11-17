@@ -10,4 +10,5 @@ package br.edu.imepac.entities;
  */
 public class Cliente {
     
+    
 }
