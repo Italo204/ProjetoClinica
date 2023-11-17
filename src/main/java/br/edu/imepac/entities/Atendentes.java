@@ -9,5 +9,8 @@ package br.edu.imepac.entities;
  * @author italo-santos-mendes
  */
 public class Atendentes {
+    private String user;
+    private String senha;
+  
     
 }
