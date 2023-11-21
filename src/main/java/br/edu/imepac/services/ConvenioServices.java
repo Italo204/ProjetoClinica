@@ -1,5 +1,5 @@
 package br.edu.imepac.services;
 
-public class  ConvenioServices {
+public class ConvenioServices {
     
 }
