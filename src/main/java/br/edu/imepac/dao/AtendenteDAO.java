@@ -4,10 +4,16 @@
  */
 package br.edu.imepac.dao;
 
+import br.edu.imepac.interfaces.IDatabaseCRUD;
+import br.edu.imepac.entities.Atendente;
+
+
+
 /**
  *
  * @author italo-santos-mendes
  */
-public class AtendenteDAO {
+
+public class AtendenteDAO implements IDatabaseCRUD<Atendente>{
     
 }

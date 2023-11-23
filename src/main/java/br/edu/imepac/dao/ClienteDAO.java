@@ -4,10 +4,12 @@
  */
 package br.edu.imepac.dao;
 
+import br.edu.imepac.interfaces.IDatabaseCRUD;
+import br.edu.imepac.entities.Cliente;
 /**
  *
  * @author italo-santos-mendes
  */
-public class ClienteDAO {
+public class ClienteDAO implements IDatabaseCRUD<Cliente>{
     
 }

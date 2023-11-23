@@ -4,10 +4,41 @@
  */
 package br.edu.imepac.services;
 
+import br.edu.imepac.dao.AtendenteDAO;
+import br.edu.imepac.entities.Atendente;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author italo-santos-mendes
  */
+
 public class AtendenteServices {
     
+    private final AtendenteDAO AtendenteDAO;
+
+    public AtendenteServices() {
+        this.AtendenteDAO = new AtendenteDAO();
+    }
+
+    public int addAtendente(Atendente atendente) throws SQLException {
+        return this.AtendenteDAO.save(atendente);
+    }
+
+    public Atendente searchAtendente(long id) throws SQLException {
+        return this.AtendenteDAO.search(id);
+    }
+
+    public int deleteAtendente(long id) throws SQLException {
+        return this.AtendenteDAO.delete(id);
+    }
+
+    public int updateAtendete(Atendente atendente) throws SQLException {
+        return this.AtendenteDAO.update(atendente);
+    }
+
+    public ArrayList<Atendente> findAllAtendentes() throws SQLException {
+        return this.AtendenteDAO.findAll();
+    }
 }
