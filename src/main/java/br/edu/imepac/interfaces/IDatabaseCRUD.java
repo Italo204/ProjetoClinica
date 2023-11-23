@@ -11,7 +11,11 @@ public interface IDatabaseCRUD<T> {
 
     int save(T entity) throws SQLException;
 
+    String saveProntuario(String prontuario) throws SQLException;
+
     int update(T entity) throws SQLException;
+
+    int updateProntuario(long id, String prontuario) throws SQLException;
 
     ArrayList<T> findAll() throws SQLException;
 
