@@ -32,7 +32,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,10 +57,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem3.setText("Médico");
         jMenu1.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
+        jMenuItem4.setIcon(new javax.swing.ImageIcon("D:\\Bruno\\convenio.png")); // NOI18N
+        jMenuItem4.setText("Convênio");
+        jMenu1.add(jMenuItem4);
 
-        jMenu2.setText("Serviço");
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Agendamento");
         jMenuBar1.add(jMenu3);
@@ -108,11 +109,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }

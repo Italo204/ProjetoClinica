@@ -26,24 +26,40 @@ public class Agendamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextFieldData = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabelTipoConsulta = new javax.swing.JLabel();
+        jLabelData = new javax.swing.JLabel();
+        jLabelCPF = new javax.swing.JLabel();
+        jLabelMedico = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel4Convenio = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 270, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 270, -1));
+        getContentPane().add(jTextFieldData, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 270, -1));
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 270, -1));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 270, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 270, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 270, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,6 +88,26 @@ public class Agendamento extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 100, 450, 260));
 
+        jLabelTipoConsulta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelTipoConsulta.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTipoConsulta.setText("Especialidade:");
+        getContentPane().add(jLabelTipoConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
+
+        jLabelData.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelData.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelData.setText("Data:");
+        getContentPane().add(jLabelData, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, -1));
+
+        jLabelCPF.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelCPF.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCPF.setText("CPF:");
+        getContentPane().add(jLabelCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, -1));
+
+        jLabelMedico.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelMedico.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMedico.setText("Médico:");
+        getContentPane().add(jLabelMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
+
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Observação:");
@@ -80,12 +116,12 @@ public class Agendamento extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nome:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("ID:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
+        jLabel4Convenio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4Convenio.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4Convenio.setText("Convênio:");
+        getContentPane().add(jLabel4Convenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,17 +174,25 @@ public class Agendamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel4Convenio;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelCPF;
+    private javax.swing.JLabel jLabelData;
+    private javax.swing.JLabel jLabelMedico;
+    private javax.swing.JLabel jLabelTipoConsulta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextFieldData;
     // End of variables declaration//GEN-END:variables
 }
