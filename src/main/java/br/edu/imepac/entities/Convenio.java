@@ -4,19 +4,35 @@ import java.time.LocalDate;
 
 
 public class Convenio {
-    public long ID;
-    public String nome;
-    public LocalDate dataInicio;
-    public LocalDate dataTermino;
-    public String detalhes;
+    private long ID;
+    private String nome;
+    private LocalDate dataInicio;
+    private LocalDate dataTermino;
+    private String CNPJ;
 
-    public Convenio(long ID, String nome, LocalDate dataInicio, LocalDate dataTermino, String detalhes){
+    public Convenio(String CNPJ, long ID, String nome, LocalDate dataInicio, LocalDate dataTermino){
         this.ID = ID;
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
-        this.detalhes = detalhes;
+        this.CNPJ = CNPJ;
     }
+
+    
+    public void setID(long iD) {
+        ID = iD;
+    }
+
+
+    public String getCNPJ() {
+        return CNPJ;
+    }
+
+
+    public void setCNPJ(String cNPJ) {
+        CNPJ = cNPJ;
+    }
+
 
     public long getID(){
         return ID;
@@ -34,14 +50,6 @@ public class Convenio {
         return dataTermino;
     }
 
-    public String getDetalhes() {
-        return detalhes;
-    }
-
-    public void setID(long ID){
-        this.ID = ID;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -52,10 +60,6 @@ public class Convenio {
 
     public void setDataTermino(LocalDate dataTermino) {
         this.dataTermino = dataTermino;
-    }
-
-    public void setDetalhes(String detalhes) {
-        this.detalhes = detalhes;
     }
 
     @Override

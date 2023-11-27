@@ -40,4 +40,8 @@ public class ClienteServices{
         return this.ClienteDAO.findAll();
     }
 
+    public int updateProntuario(long id, String prontuario) throws SQLException {
+        return this.ClienteDAO.updateProntuario(id, prontuario);
+    }
+
 }

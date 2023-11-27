@@ -19,4 +19,6 @@ public interface IDatabaseCRUD<T> {
 
     ArrayList<T> findAll() throws SQLException;
 
+    ArrayList<T> findAllProntuario(T entity) throws SQLException;
+
 }
