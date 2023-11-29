@@ -8,6 +8,7 @@ package br.edu.imepac.entities;
  *
  * @author italo-santos-mendes
  */
+
 public class Atendente extends Pessoa{
 
     public Atendente (long ID, String nome, String email, String senha, String CPF, String telefone, String sexo) {

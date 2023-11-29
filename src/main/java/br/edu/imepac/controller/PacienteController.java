@@ -2,14 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.edu.imepac.dao;
+package br.edu.imepac.controller;
 
-import br.edu.imepac.interfaces.IDatabaseCRUD;
-import br.edu.imepac.entities.Cliente;
 /**
  *
  * @author italo-santos-mendes
  */
-public class ClienteDAO implements IDatabaseCRUD<Cliente>{
+public class PacienteController {
     
 }

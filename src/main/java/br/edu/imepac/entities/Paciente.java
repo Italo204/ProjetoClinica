@@ -9,10 +9,12 @@ import java.time.LocalDate;
  *
  * @author italo-santos-mendes
  */
-public class Cliente extends Pessoa{
+
+ 
+public class Paciente extends Pessoa{
     private LocalDate nascimento;
 
-    public Cliente(long ID, String nome, String email, String senha, String CPF, String telefone, String sexo,
+    public Paciente(long ID, String nome, String email, String senha, String CPF, String telefone, String sexo,
             LocalDate nascimento) {
         super(ID, nome, email, senha, CPF, telefone, sexo);
         this.nascimento = nascimento;

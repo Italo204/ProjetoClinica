@@ -5,10 +5,22 @@
 package br.edu.imepac.dao;
 import br.edu.imepac.entities.Medico;
 import br.edu.imepac.interfaces.IDatabaseCRUD;
+import br.edu.imepac.interfaces.IProntuarioCRUD;
 /**
  *
  * @author italo-santos-mendes
  */
-public class MedicoDAO implements IDatabaseCRUD<Medico>{
+public class MedicoDAO implements IProntuarioCRUD<Prontuario>, IDatabaseCRUD<Medico>{
     
+
+
+
+
+
+
+
+
+
+
+
 }

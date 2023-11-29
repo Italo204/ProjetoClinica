@@ -45,11 +45,4 @@ public class MedicoServices {
         return this.MedicoDAO.findAll();
     }
 
-    public String createProntuario(String prontuario) throws SQLException{
-        return this.MedicoDAO.saveProntuario(prontuario);
-    }
-
-    public int updateProntuario(long id, String prontuario) throws SQLException {
-        return this.MedicoDAO.updateProntuario(id, prontuario);
-    }
 }
