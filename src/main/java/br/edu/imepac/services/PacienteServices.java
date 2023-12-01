@@ -20,8 +20,8 @@ public class PacienteServices{
         this.PacienteDAO = new PacienteDAO();
     }
 
-    public int addCliente(Paciente paciente) throws SQLException {
-        return this.PacienteDAO.save(paciente);
+    public void addCliente(Paciente paciente) throws SQLException {
+        this.PacienteDAO.save(paciente);
     }
 
     public Paciente searchCliente(long id) throws SQLException {

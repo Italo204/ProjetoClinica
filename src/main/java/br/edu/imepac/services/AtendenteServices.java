@@ -22,8 +22,8 @@ public class AtendenteServices {
         this.AtendenteDAO = new AtendenteDAO();
     }
 
-    public int addAtendente(Atendente atendente) throws SQLException {
-        return this.AtendenteDAO.save(atendente);
+    public void addAtendente(Atendente atendente) throws SQLException {
+        this.AtendenteDAO.save(atendente);
     }
 
     public Atendente searchAtendente(long id) throws SQLException {

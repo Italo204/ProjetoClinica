@@ -3,14 +3,16 @@ package br.edu.imepac.entities;
 public class Prontuario {
     private long id;
     private String nomePaciente;
-    private String descricao;
-    private String caminhoArquivo;
+    private String Historico;
+    private String Exames;
+    private String Receituario;
     
-    public Prontuario(long id, String nomePaciente, String descricao, String caminhoArquivo) {
+    public Prontuario(long id, String nomePaciente, String historico, String exames, String receituario) {
         this.id = id;
         this.nomePaciente = nomePaciente;
-        this.descricao = descricao;
-        this.caminhoArquivo = caminhoArquivo;
+        Historico = historico;
+        Exames = exames;
+        Receituario = receituario;
     }
 
     public long getId() {
@@ -29,21 +31,30 @@ public class Prontuario {
         this.nomePaciente = nomePaciente;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getHistorico() {
+        return Historico;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setHistorico(String historico) {
+        Historico = historico;
     }
 
-    public String getCaminhoArquivo() {
-        return caminhoArquivo;
+    public String getExames() {
+        return Exames;
     }
 
-    public void setCaminhoArquivo(String caminhoArquivo) {
-        this.caminhoArquivo = caminhoArquivo;
+    public void setExames(String exames) {
+        Exames = exames;
     }
 
+    public String getReceituario() {
+        return Receituario;
+    }
+
+    public void setReceituario(String receituario) {
+        Receituario = receituario;
+    }
+    
+    
     
 }

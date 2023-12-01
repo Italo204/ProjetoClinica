@@ -25,8 +25,8 @@ public class MedicoServices {
         this.MedicoDAO = new MedicoDAO();
     }
 
-    public int addMedico(Medico medico) throws SQLException {
-        return this.MedicoDAO.save(medico);
+    public void addMedico(Medico medico) throws SQLException {
+        this.MedicoDAO.save(medico);
     }
 
     public int deleteMedico(long id) throws SQLException {

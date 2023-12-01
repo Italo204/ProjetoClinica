@@ -13,8 +13,8 @@ public class ConvenioServices {
         this.ConvenioDAO = new ConvenioDAO();
     } 
 
-    public int addConvenio(Convenio convenio) throws SQLException {
-        return this.ConvenioDAO.save(convenio);
+    public void addConvenio(Convenio convenio) throws SQLException {
+        this.ConvenioDAO.save(convenio);
     }
 
     public Convenio searchConvenio(long id) throws SQLException {

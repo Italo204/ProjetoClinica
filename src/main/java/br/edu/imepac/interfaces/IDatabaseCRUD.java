@@ -9,7 +9,7 @@ public interface IDatabaseCRUD<T> {
 
     T search(Long id) throws SQLException;
 
-    int save(T entity) throws SQLException;
+    void save(T entity) throws SQLException;
 
     int update(T entity) throws SQLException;
 

@@ -10,7 +10,7 @@ package br.edu.imepac.entities;
  */
 
 public class Atendente extends Pessoa{
-
+    
     public Atendente (long ID, String nome, String email, String senha, String CPF, String telefone, String sexo) {
         super(ID, nome, email, senha, CPF, telefone, sexo);
     }
