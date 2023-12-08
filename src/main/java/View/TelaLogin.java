@@ -4,8 +4,6 @@
  */
 package View;
 
-import br.edu.imepac.main.*;
-
 /**
  *
  * @author italo-santos-mendes

@@ -26,7 +26,9 @@ public class Agendamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         jTextFieldData = new javax.swing.JTextField();
+        jTextFieldHora = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
@@ -37,6 +39,7 @@ public class Agendamento extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabelHora = new javax.swing.JLabel();
         jLabelTipoConsulta = new javax.swing.JLabel();
         jLabelData = new javax.swing.JLabel();
         jLabelCPF = new javax.swing.JLabel();
@@ -50,7 +53,16 @@ public class Agendamento extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jTextFieldData, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 270, -1));
+
+        jButton2.setText("VOLTAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 490, 150, 40));
+        getContentPane().add(jTextFieldData, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 270, -1));
+        getContentPane().add(jTextFieldHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 270, -1));
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 270, -1));
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 270, -1));
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 270, -1));
@@ -87,6 +99,11 @@ public class Agendamento extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 100, 450, 260));
+
+        jLabelHora.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelHora.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelHora.setText("Hora:");
+        getContentPane().add(jLabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
 
         jLabelTipoConsulta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelTipoConsulta.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,6 +154,10 @@ public class Agendamento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+new MenuPrincipal().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,6 +195,7 @@ public class Agendamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -184,6 +206,7 @@ public class Agendamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelCPF;
     private javax.swing.JLabel jLabelData;
+    private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelMedico;
     private javax.swing.JLabel jLabelTipoConsulta;
     private javax.swing.JScrollPane jScrollPane1;
@@ -194,5 +217,6 @@ public class Agendamento extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextFieldData;
+    private javax.swing.JTextField jTextFieldHora;
     // End of variables declaration//GEN-END:variables
 }
