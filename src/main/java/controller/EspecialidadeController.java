@@ -3,9 +3,9 @@ package controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import View.BaseForm;
 import entities.Especialidade;
 import services.EspecialidadeServices;
-import views.BaseForm;
 
 public class EspecialidadeController {
     private final EspecialidadeServices especialidadeServices;

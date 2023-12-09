@@ -2,9 +2,9 @@ package controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import View.BaseForm;
 import entities.Convenio;
 import services.ConvenioServices;
-import views.BaseForm;
 
 public class ConvenioController {
     private final ConvenioServices convenioServices;

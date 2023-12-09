@@ -5,11 +5,11 @@
 package controller;
 
 import services.MedicoServices;
-import views.BaseForm;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import View.BaseForm;
 import entities.Medico;
 /**
  *

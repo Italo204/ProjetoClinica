@@ -16,10 +16,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import views.BaseForm;
-
 import javax.swing.JOptionPane;
 
+import View.BaseForm;
 import entities.Atendente;
 import utils.Database;
 

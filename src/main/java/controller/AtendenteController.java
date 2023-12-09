@@ -7,9 +7,9 @@ package controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import View.BaseForm;
 import entities.Atendente;
 import services.AtendenteServices;
-import views.BaseForm;
 
 /**
  *
