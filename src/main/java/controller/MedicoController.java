@@ -5,7 +5,7 @@
 package controller;
 
 import services.MedicoServices;
-import views.BaseForm;
+import View.BaseForm;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

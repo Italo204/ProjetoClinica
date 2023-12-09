@@ -15,9 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import views.BaseForm;
-
 import javax.swing.JOptionPane;
 
 import entities.Atendente;
@@ -30,7 +27,7 @@ import utils.Database;
  * @author italo-santos-mendes
  */
 
-public class AtendenteDAO extends BaseForm implements IDatabaseCRUD<Atendente>{
+public class AtendenteDAO implements IDatabaseCRUD<Atendente>{
 
     @Override
     public void save(Atendente atendente) throws SQLException {
