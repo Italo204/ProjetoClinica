@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import entities.Convenio;
 import services.ConvenioServices;
-import views.BaseForm;
+import View.BaseForm;
 
 public class ConvenioController {
     private final ConvenioServices convenioServices;

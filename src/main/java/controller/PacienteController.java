@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import entities.Paciente;
 import services.PacienteServices;
-import views.BaseForm;
+import View.BaseForm;
 
 /**
  *

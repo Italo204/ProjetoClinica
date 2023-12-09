@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
 import javax.swing.JOptionPane;
-import javax.xml.crypto.Data;
 
 import entities.Convenio;
 import interfaces.IDatabaseCRUD;

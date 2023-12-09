@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import entities.Especialidade;
 import services.EspecialidadeServices;
-import views.BaseForm;
+import View.BaseForm;
 
 public class EspecialidadeController {
     private final EspecialidadeServices especialidadeServices;

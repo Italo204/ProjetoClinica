@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.xml.crypto.Data;
-
 import entities.Agendamento;
 import interfaces.IDatabaseCRUD;
 import utils.Database;
