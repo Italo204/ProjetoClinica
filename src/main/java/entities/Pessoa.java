@@ -13,6 +13,17 @@ public abstract class Pessoa {
     protected LocalDate nascimento;
     
     
+    
+    public Pessoa(long iD, String nome, String email, String CPF, String telefone, String sexo, LocalDate nascimento) {
+        this.ID = iD;
+        this.nome = nome;
+        this.email = email;
+        this.CPF = CPF;
+        this.telefone = telefone;
+        this.sexo = sexo;
+        this.nascimento = nascimento;
+    }
+
     public Pessoa(long ID, String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento) {
         this.ID = ID;
         this.nome = nome;

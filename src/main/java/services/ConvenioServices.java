@@ -7,30 +7,30 @@ import entities.Convenio;
 
 
 public class ConvenioServices {
-    private final ConvenioDAO ConvenioDAO;
+    private final ConvenioDAO convenioDAO;
     
     public ConvenioServices() {
-        this.ConvenioDAO = new ConvenioDAO();
+        this.convenioDAO = new ConvenioDAO();
     } 
 
     public void addConvenio(Convenio convenio) throws SQLException {
-        this.ConvenioDAO.save(convenio);
+        this.convenioDAO.save(convenio);
     }
 
     public Convenio searchConvenio(long id) throws SQLException {
-        return this.ConvenioDAO.search(id);
+        return this.convenioDAO.search(id);
     }
 
     public int deleteConvenio(long id) throws SQLException {
-        return this.ConvenioDAO.delete(id);
+        return this.convenioDAO.delete(id);
     }
 
     public int updateConvenio(Convenio convenio) throws SQLException {
-        return this.ConvenioDAO.update(convenio);
+        return this.convenioDAO.update(convenio);
     }
 
     public ArrayList<Convenio> findAllConvenios() throws SQLException {
-        return this.ConvenioDAO.findAll();
+        return this.convenioDAO.findAll();
     }
 
 }

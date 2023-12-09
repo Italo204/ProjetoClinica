@@ -20,23 +20,23 @@ public class PacienteServices{
         this.PacienteDAO = new PacienteDAO();
     }
 
-    public void addCliente(Paciente paciente) throws SQLException {
+    public void addPaciente(Paciente paciente) throws SQLException {
         this.PacienteDAO.save(paciente);
     }
 
-    public Paciente searchCliente(long id) throws SQLException {
+    public Paciente searchPaciente(long id) throws SQLException {
         return this.PacienteDAO.search(id);
     }
 
-    public int deleteCliente(long id) throws SQLException {
+    public int deletePaciente(long id) throws SQLException {
         return this.PacienteDAO.delete(id);
     }
 
-    public int updateCliente(Paciente cliente) throws SQLException {
-        return this.PacienteDAO.update(cliente);
+    public int updatePaciente(Paciente paciente) throws SQLException {
+        return this.PacienteDAO.update(paciente);
     }
 
-    public ArrayList<Paciente> findAllCliente() throws SQLException {
+    public ArrayList<Paciente> findAllPaciente() throws SQLException {
         return this.PacienteDAO.findAll();
     }
 

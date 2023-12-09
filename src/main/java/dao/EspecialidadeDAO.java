@@ -17,7 +17,7 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
 
     @Override
     public void save(Especialidade especialidade) throws SQLException {
-        String sql = "INSERT INTO Especialidade(Especialidade) VALUES (?)";
+        String sql = "INSERT INTO Especialidade(especialidade) VALUES (?)";
         PreparedStatement ps = null;
 
         try{
@@ -35,7 +35,7 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
 
     @Override
     public Especialidade search(Long id) throws SQLException {
-        String sql = "SELECT * FROM ESPECIALIDADE WHERE ID = ?";
+        String sql = "SELECT * FROM ESPECIALIDADE WHERE IDEspecialidade = ?";
         PreparedStatement ps = null;
 
         try{
@@ -44,7 +44,7 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
             ResultSet result = ps.executeQuery();
             Especialidade especialidade = null;
             if (result.next()){
-                especialidade =  new Especialidade(result.getLong("IDEspecialidade"), result.getString("Nome"));
+                especialidade =  new Especialidade(result.getLong("IDEspecialidade"), result.getString("Especialidade"));
             }
             return especialidade;
         } catch(SQLException e) {
@@ -59,7 +59,7 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
 
      @Override
     public int delete(Long id) throws SQLException{
-        String sql = "DELETE FROM Especialidade WHERE ID = ?";
+        String sql = "DELETE FROM Especialidade WHERE IDEspecialidade = ?";
         PreparedStatement ps = null;
         try {
             ps= Database.getConexao().prepareStatement(sql.toString());
@@ -76,7 +76,7 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
 
     @Override
     public int update(Especialidade especialidade) throws SQLException{
-        String sql = "UPDATE Especialidade SET Especialidade = ? WHERE ID = ?";
+        String sql = "UPDATE Especialidade SET especialidade = ? WHERE IDEspecialidade = ?";
         PreparedStatement ps = null;
         try {
             ps = Database.getConexao().prepareStatement(sql.toString());
@@ -103,8 +103,8 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
             ResultSet rs = ps.executeQuery();
             ArrayList<Especialidade> especialidade = new ArrayList<>();
             while (rs.next()) {
-                long id = rs.getLong("id");
-                String nome = rs.getString("Nome");
+                long id = rs.getLong("IDEspecialidade");
+                String nome = rs.getString("especialidade");
                 Especialidade especialidades = new Especialidade(id, nome);
                 especialidade.add(especialidades);
             }

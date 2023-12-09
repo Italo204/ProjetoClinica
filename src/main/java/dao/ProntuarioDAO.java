@@ -3,6 +3,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -34,7 +35,7 @@ public class ProntuarioDAO implements IProntuarioCRUD<Prontuario> {
 
     @Override
     public Prontuario searchProntuario(long id) throws SQLException {
-        String sql = "Select * from prontuario where id = ?";
+        String sql = "Select * from prontuario where IDProntuario = ?";
         PreparedStatement ps = null;
 
         try {
@@ -58,7 +59,7 @@ public class ProntuarioDAO implements IProntuarioCRUD<Prontuario> {
 
     @Override
     public int deleteProntuario(long id) throws SQLException {
-        String sql = "DELETE FROM PRONTUARIO WHERE ID = ?";
+        String sql = "DELETE FROM PRONTUARIO WHERE IDProntuario = ?";
         PreparedStatement ps =  null;
 
         try {
@@ -76,13 +77,52 @@ public class ProntuarioDAO implements IProntuarioCRUD<Prontuario> {
 
     @Override
     public int updateProntuario(Prontuario prontuario) throws SQLException {
-        String sql = "UPDATE PRONTUARIO SET HISTORICO = ?, RECEITUARIO = ?, EXAMES = ? WHERE ID = ?";
+        String sql = "UPDATE PRONTUARIO SET HISTORICO = ?, RECEITUARIO = ?, EXAMES = ? WHERE IDProntuario = ?";
         PreparedStatement ps = null;
 
         try {
             ps =  Database.getConexao().prepareStatement(sql.toString());
-        } catch (Exception e) {
-            // TODO: handle exception
+            ps.setString(1, prontuario.getHistorico());
+            ps.setString(2, prontuario.getReceituario());
+            ps.setString(3, prontuario.getExames());
+            ps.setLong(4, prontuario.getId());
+
+            int result = ps.executeUpdate();
+            return result;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        } finally {
+            Database.closeConnection();
+        }
+    }
+
+    @Override
+    public ArrayList<Prontuario> findAllProntuario() throws SQLException {
+        String sql = "SELECT * FROM PRONTUARIO";
+        PreparedStatement ps = null;
+
+        try {
+            ps = Database.getConexao().prepareStatement(sql.toString());
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Prontuario> prontuario =  new ArrayList<>();
+            while(rs.next()){
+                long id = rs.getLong("IDProntuario");
+                String historico = rs.getString("Historico");
+                String receituario = rs.getString("Receituario");
+                String exames = rs.getString("Exames");
+                String nomePaciente = rs.getString("NomePaciente");
+
+                Prontuario prontuarios = new Prontuario(id, historico, receituario, exames, nomePaciente);
+                prontuario.add(prontuarios);
+            }
+
+            return prontuario;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }finally{
+            Database.closeConnection();
         }
     }
 }

@@ -25,7 +25,7 @@ public class PacienteDAO implements IDatabaseCRUD<Paciente>{
     public void save(Paciente paciente) throws SQLException {
         LocalDate dataNas = paciente.getNascimento();
         
-        String sql = "INSERT INTO paciente(NOME, EMAIL, SENHA, CPF, TELEFONE, SEXO, NASCIMENTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO paciente(Nome, email, CPF, Telefone, Sexo, Nascimento) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
        
         Date nascimento = Date.valueOf(dataNas);
@@ -34,11 +34,10 @@ public class PacienteDAO implements IDatabaseCRUD<Paciente>{
             ps = Database.getConexao().prepareStatement(sql.toString());
             ps.setString(1, paciente.getNome());
             ps.setString(2, paciente.getEmail());
-            ps.setString(3, paciente.getSenha());
-            ps.setString(4, paciente.getCPF());
-            ps.setString(5, paciente.getTelefone());
-            ps.setString(6, paciente.getSexo());
-            ps.setDate(7, nascimento);
+            ps.setString(3, paciente.getCPF());
+            ps.setString(4, paciente.getTelefone());
+            ps.setString(5, paciente.getSexo());
+            ps.setDate(6, nascimento);
 
             ps.executeUpdate();
             ps.close();
@@ -53,7 +52,7 @@ public class PacienteDAO implements IDatabaseCRUD<Paciente>{
     @Override
     public Paciente search(Long id) throws SQLException {
         
-        String sql = "SELECT * FROM paciente WHERE ID = ?";
+        String sql = "SELECT * FROM paciente WHERE IDPaciente = ?";
         PreparedStatement ps = null;
 
         try{
@@ -62,7 +61,7 @@ public class PacienteDAO implements IDatabaseCRUD<Paciente>{
             ResultSet result = ps.executeQuery();
             Paciente paciente = null;
             if (result.next()){
-                paciente =  new Paciente(result.getLong("ID"), result.getString("Nome"), result.getString("Email"),result.getString("senha"),
+                paciente =  new Paciente(result.getLong("IDPaciente"), result.getString("Nome"), result.getString("email"),
                 result.getString("CPF"), result.getString("Telefone"), result.getString("Sexo"), result.getDate("Nascimento").toLocalDate());
             }
             return paciente;
@@ -76,7 +75,7 @@ public class PacienteDAO implements IDatabaseCRUD<Paciente>{
     
     @Override
     public int delete(Long id) throws SQLException{
-        String sql = "DELETE FROM paciente WHERE ID = ?";
+        String sql = "DELETE FROM paciente WHERE IDPaciente = ?";
         PreparedStatement ps = null;
         try{
             ps = Database.getConexao().prepareStatement(sql.toString());
@@ -108,7 +107,7 @@ public class PacienteDAO implements IDatabaseCRUD<Paciente>{
             sql.append(campo).append("=?, ");
         }  
         sql.delete(sql.length() - 2, sql.length());
-        sql.append("WHERE ID = ?");
+        sql.append("WHERE IDPaciente = ?");
 
         ps = Database.getConexao().prepareStatement(sql.toString());
 
@@ -135,7 +134,7 @@ public class PacienteDAO implements IDatabaseCRUD<Paciente>{
 
     @Override
     public ArrayList<Paciente> findAll() throws SQLException {
-        String sql = "SELECT * FROM paciente";
+        String sql = "SELECT IDPaciente, Telefone, CPF, Sexo, email, Nome, Nascimento FROM paciente";
         PreparedStatement ps = null;
 
         try {
@@ -143,16 +142,15 @@ public class PacienteDAO implements IDatabaseCRUD<Paciente>{
             ResultSet rs = ps.executeQuery();
             ArrayList<Paciente> paciente = new ArrayList<>();
             while(rs.next()){
-                long id = rs.getLong("IDAtendente");
+                long id = rs.getLong("IDPaciente");
                 String telefone = rs.getString("Telefone");
                 String cpf = rs.getString("CPF");
-                String sexo = rs.getString("sexo");
-                String email = rs.getString("Email");
+                String sexo = rs.getString("Sexo");
+                String email = rs.getString("email");
                 String nome = rs.getString("Nome");
-                String senha = rs.getString("Senha");
                 LocalDate nascimento = rs.getDate("Nascimento").toLocalDate();
 
-                Paciente pacientes = new Paciente(id, nome, email, senha, cpf, telefone, sexo, nascimento);
+                Paciente pacientes = new Paciente(id, nome, email, cpf, telefone, sexo, nascimento);
                 paciente.add(pacientes);
             }
             return paciente;

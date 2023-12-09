@@ -54,7 +54,7 @@ public class MedicoDAO implements IDatabaseCRUD<Medico>{
     @Override
     public Medico search(Long id) throws SQLException {
         
-        String sql = "SELECT * FROM medico WHERE ID = ?";
+        String sql = "SELECT IDMedico, Telefone, CPF, Sexo, Email, Nome, Senha, Nascimento FROM medico WHERE IDMedico = ?";
         PreparedStatement ps = null;
 
         try{
@@ -63,8 +63,8 @@ public class MedicoDAO implements IDatabaseCRUD<Medico>{
             ResultSet result = ps.executeQuery();
             Medico medico = null;
             if (result.next()){
-                medico =  new Medico(result.getLong("ID"), result.getString("Nome"), result.getString("Email"),result.getString("senha"),
-                result.getString("CPF"), result.getString("Telefone"), result.getString("Sexo"), result.getDate("Nascimento").toLocalDate());
+                medico =  new Medico(result.getLong("IDMedico"), result.getString("Telefone"), result.getString("CPF"),result.getString("Sexo"),
+                result.getString("Email"), result.getString("Nome"), result.getString("Senha"), result.getDate("Nascimento").toLocalDate());
             }
             return medico;
         } catch(SQLException e) {
@@ -77,7 +77,7 @@ public class MedicoDAO implements IDatabaseCRUD<Medico>{
     
     @Override
     public int delete(Long id) throws SQLException{
-        String sql = "DELETE FROM medico WHERE ID = ?";
+        String sql = "DELETE FROM medico WHERE IDMedico = ?";
         PreparedStatement ps = null;
         try{
             ps = Database.getConexao().prepareStatement(sql.toString());
@@ -109,7 +109,7 @@ public class MedicoDAO implements IDatabaseCRUD<Medico>{
             sql.append(campo).append("=?, ");
         }  
         sql.delete(sql.length() - 2, sql.length());
-        sql.append("WHERE ID = ?");
+        sql.append("WHERE IDMedico = ?");
 
         ps = Database.getConexao().prepareStatement(sql.toString());
 

@@ -13,9 +13,9 @@ import java.time.LocalDate;
  
 public class Paciente extends Pessoa{
 
-    public Paciente(long ID, String nome, String email, String senha, String CPF, String telefone, String sexo,
+    public Paciente(long ID, String nome, String email, String CPF, String telefone, String sexo,
             LocalDate nascimento) {
-        super(ID, nome, email, senha, CPF, telefone, sexo, nascimento);
+        super(ID, nome, email, CPF, telefone, sexo, nascimento);
     }
 
     @Override

@@ -64,7 +64,7 @@ public class AtendenteDAO extends BaseForm implements IDatabaseCRUD<Atendente>{
     @Override
     public Atendente search(Long id) throws SQLException {
         
-        String sql = "SELECT * FROM atendente WHERE ID = ?";
+        String sql = "SELECT * FROM atendente WHERE IDAtendente = ?";
         PreparedStatement ps = null;
 
         try{
@@ -73,8 +73,8 @@ public class AtendenteDAO extends BaseForm implements IDatabaseCRUD<Atendente>{
             ResultSet result = ps.executeQuery();
             Atendente atendente = null;
             if (result.next()){
-                atendente =  new Atendente(result.getLong("ID"), result.getString("Nome"), result.getString("Email"),result.getString("senha"),
-                result.getString("CPF"), result.getString("Telefone"), result.getString("Sexo"), result.getDate("Nascimento").toLocalDate());
+                atendente =  new Atendente(result.getLong("IDAtendente"), result.getString("nome"), result.getString("email"),result.getString("senha"),
+                result.getString("CPF"), result.getString("telefone"), result.getString("sexo"), result.getDate("nascimento").toLocalDate());
             }
             return atendente;
         } catch(SQLException e) {
@@ -87,7 +87,7 @@ public class AtendenteDAO extends BaseForm implements IDatabaseCRUD<Atendente>{
     
     @Override
     public int delete(Long id) throws SQLException{
-        String sql = "DELETE FROM atendente WHERE ID = ?";
+        String sql = "DELETE FROM atendente WHERE IDAtendente = ?";
         PreparedStatement ps = null;
         try{
             ps = Database.getConexao().prepareStatement(sql.toString());
@@ -119,7 +119,7 @@ public class AtendenteDAO extends BaseForm implements IDatabaseCRUD<Atendente>{
             sql.append(campo).append("=?, ");
         }  
         sql.delete(sql.length() - 2, sql.length());
-        sql.append("WHERE ID = ?");
+        sql.append("WHERE IDAtendente = ?");
 
         ps = Database.getConexao().prepareStatement(sql.toString());
 
@@ -155,13 +155,13 @@ public class AtendenteDAO extends BaseForm implements IDatabaseCRUD<Atendente>{
             ArrayList<Atendente> atendente = new ArrayList<>();
             while(rs.next()){
                 long id = rs.getLong("IDAtendente");
-                String telefone = rs.getString("Telefone");
+                String telefone = rs.getString("telefone");
                 String cpf = rs.getString("CPF");
                 String sexo = rs.getString("sexo");
-                String email = rs.getString("Email");
-                String nome = rs.getString("Nome");
-                String senha = rs.getString("Senha");
-                LocalDate nascimento = rs.getDate("Nascimento").toLocalDate();
+                String email = rs.getString("email");
+                String nome = rs.getString("nome");
+                String senha = rs.getString("senha");
+                LocalDate nascimento = rs.getDate("nascimento").toLocalDate();
 
                 Atendente atendentes = new Atendente(id, nome, email, senha, cpf, telefone, sexo, nascimento);
                 atendente.add(atendentes);

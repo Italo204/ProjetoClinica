@@ -18,7 +18,7 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
     public void save(Convenio convenio) throws SQLException {
         LocalDate dataInicio = convenio.getDataInicio();
         LocalDate dataTermnino = convenio.getDataTermino();
-        String sql = "INSERT INTO CONVENIO(NOME, CNPJ, DATAINICIO, DATATERMINO) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO CONVENIO(Nome, CNPJ, DataInicio, DataTermino) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = null;
 
         try{
@@ -42,7 +42,7 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
 
     @Override
     public Convenio search(Long id) throws SQLException {
-        String sql = "SELECT * FROM CONVENIO WHERE ID = ?";
+        String sql = "SELECT * FROM CONVENIO WHERE IDConvenio = ?";
         PreparedStatement ps = null;
 
         try{
@@ -51,7 +51,7 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
             ResultSet result = ps.executeQuery();
             Convenio convenio = null;
             if (result.next()){
-                convenio =  new Convenio(result.getLong("IDConvenio"), result.getString("Nome"), result.getDate("dataInicio").toLocalDate(),result.getDate("dataTermino").toLocalDate(), result.getString("CNPJ"));
+                convenio =  new Convenio(result.getLong("IDConvenio"), result.getString("Nome"), result.getDate("DataInicio").toLocalDate(),result.getDate("DataTermino").toLocalDate(), result.getString("CNPJ"));
             }
             return convenio;
         } catch(SQLException e) {
@@ -66,7 +66,7 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
 
      @Override
     public int delete(Long id) throws SQLException{
-        String sql = "DELETE FROM CONVENIO WHERE ID = ?";
+        String sql = "DELETE FROM CONVENIO WHERE IDConvenio = ?";
         PreparedStatement ps = null;
         try {
             ps= Database.getConexao().prepareStatement(sql.toString());
@@ -83,7 +83,7 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
 
     @Override
     public int update(Convenio convenio) throws SQLException{
-        String sql = "UPDATE CONVENIO SET NOME = ?, DATAINICIO = ?, DATATERMINO = ?, CNPJ = ? WHERE ID = ?";
+        String sql = "UPDATE CONVENIO SET Nome = ?, DataInicio = ?, DataTermino = ?, CNPJ = ? WHERE IDConvenio = ?";
         PreparedStatement ps = null;
         LocalDate dataInicio = convenio.getDataInicio();
         LocalDate dataTermnino = convenio.getDataTermino();
@@ -116,10 +116,10 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
             ResultSet rs = ps.executeQuery();
             ArrayList<Convenio> convenio = new ArrayList<>();
             while (rs.next()) {
-                long id = rs.getLong("id");
+                long id = rs.getLong("IDConvenio");
                 String nome = rs.getString("Nome");
-                LocalDate dataInicio = rs.getDate("dataInicio").toLocalDate();
-                LocalDate dataTermino = rs.getDate("dataTermino").toLocalDate();
+                LocalDate dataInicio = rs.getDate("DataInicio").toLocalDate();
+                LocalDate dataTermino = rs.getDate("DataTermino").toLocalDate();
                 String cnpj = rs.getString("CNPJ");
                 
 

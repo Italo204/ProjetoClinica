@@ -4,10 +4,65 @@
  */
 package controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import entities.Atendente;
+import services.AtendenteServices;
+import views.BaseForm;
+
 /**
  *
  * @author italo-santos-mendes
  */
 public class AtendenteController {
+
+    private final AtendenteServices atendenteServices;
+    private final BaseForm baseForm;
+
+    public AtendenteController(BaseForm bForm){
+        this.atendenteServices = new AtendenteServices();
+        this.baseForm = bForm;
+    }
+
+    public void saveAtendente(Atendente atendente){
+        try {
+            this.atendenteServices.addAtendente(atendente);
+        } catch (SQLException e) {
+            baseForm.showErrorInternal(e.getMessage());
+        }
+    }
+
+    public void updateAtendente(Atendente atendente) {
+        try {
+            this.atendenteServices.updateAtendete(atendente);
+        } catch (SQLException e) {
+            baseForm.showErrorInternal(e.getMessage());
+        }
+    }
     
+    public void deleteAtendente(Atendente atendente) {
+        try {
+            this.atendenteServices.deleteAtendente(atendente.getID());
+        } catch (SQLException e) {
+            baseForm.showErrorInternal(e.getMessage());
+        }
+    }
+
+    public void searchAtendente(Atendente atendente) {
+        try {
+            this.atendenteServices.searchAtendente(atendente.getID());
+        } catch (SQLException e) {
+            baseForm.showErrorInternal(e.getMessage());
+        }
+    }
+
+    public ArrayList<Atendente> findAllAtendente() {
+        try {
+            return this.atendenteServices.findAllAtendentes();
+        } catch (SQLException e) {
+            baseForm.showErrorInternal(e.getMessage());
+            return null;
+        }
+    }
 }

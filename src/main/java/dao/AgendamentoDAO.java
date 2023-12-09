@@ -55,7 +55,7 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
         "JOIN PACIENTE P ON A.IDPaciente = P.IDPaciente "+
         "LEFT JOIN Medico M ON A.IDMedico = M.IDMedico "+
         "LEFT JOIN Convenio C ON A.IDConvenio = C.IDConvenio "+
-        "WHERE A.ID = ? ;";
+        "WHERE A.IDAgendamento = ? ;";
         PreparedStatement ps = null;
 
         try{
@@ -64,9 +64,9 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
             ResultSet result = ps.executeQuery();
             Agendamento agendamento = null;
             if (result.next()){
-                agendamento =  new Agendamento(result.getLong("id"), result.getDate("data").toLocalDate(), result.getString("CPF"), 
-                result.getString("Observacao"), result.getString("TipoConsulta"), result.getString("Medico"), 
-                result.getString("Convenio"), result.getString("Nome"), result.getTime("hora").toLocalTime());
+                agendamento =  new Agendamento(result.getLong("IDAgendamento"), result.getDate("Dia").toLocalDate(), result.getString("CPF"), 
+                result.getString("observacoes"), result.getString("TipoConsulta"), result.getString("NomeMedico"), 
+                result.getString("NomeConvenio"), result.getString("Nome"), result.getTime("hora").toLocalTime());
             }
             return agendamento;
         } catch(SQLException e) {
@@ -79,7 +79,7 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
     
     @Override
     public int delete(Long id) throws SQLException{
-        String sql = "DELETE FROM agendamento WHERE ID = ? ;";
+        String sql = "DELETE FROM agendamento WHERE IDAgendamento = ? ;";
         PreparedStatement ps = null;
 
         try {
