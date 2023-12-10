@@ -4,6 +4,14 @@
  */
 package View;
 
+import dao.EspecialidadeDAO;
+import entities.Especialidade;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -32,7 +40,7 @@ public class Agendamento extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbespecialidade = new javax.swing.JComboBox();
         jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -54,7 +62,6 @@ public class Agendamento extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setIcon(new javax.swing.ImageIcon("D:\\Bruno\\voltar (1).png")); // NOI18N
         jButton2.setText("VOLTAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,8 +75,21 @@ public class Agendamento extends javax.swing.JFrame {
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 270, -1));
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 270, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 270, -1));
+        cbespecialidade.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cbespecialidadeAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        cbespecialidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbespecialidadeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbespecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 270, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, -1));
@@ -145,11 +165,7 @@ public class Agendamento extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Agenda");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, -1, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Bruno\\BarberShop Material\\View\\imagens\\Agenda-PainelFundo.png")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 1250, 650));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Bruno\\clinica-medica menuprincipal.jpg")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-530, 0, 1880, 760));
 
         pack();
@@ -158,6 +174,25 @@ public class Agendamento extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 new MenuPrincipal().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cbespecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbespecialidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbespecialidadeActionPerformed
+
+    private void cbespecialidadeAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbespecialidadeAncestorAdded
+       EspecialidadeDAO espc = new EspecialidadeDAO();
+        try {
+            ArrayList<Especialidade> listaEspc = espc.findAll();
+            
+            cbespecialidade.removeAll();
+            
+            for(Especialidade e : listaEspc){
+                cbespecialidade.addItem(e);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: "+ex.getMessage(), "ERRO CONEXAO", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cbespecialidadeAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -195,9 +230,9 @@ new MenuPrincipal().setVisible(true);        // TODO add your handling code here
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cbespecialidade;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

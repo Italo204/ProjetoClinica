@@ -1,0 +1,174 @@
+[33mcommit ba373cbb97abd08a64df8989694a74e4e1828c04[m[33m ([m[1;36mHEAD -> [m[1;32mitalosm[m[33m, [m[1;31morigin/italosm[m[33m)[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Sat Dec 9 17:46:59 2023 -0300
+
+    Tudo Correto!
+
+[33mcommit 106729a353b3c5932f37fb0316a74d9397537508[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Sat Dec 9 17:32:27 2023 -0300
+
+    TA INDO MLK
+
+[33mcommit 6c0320e64089f706b45f06f5e09c38cb4a01521c[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: e695282 8e8d6e0
+Author: BrunoJMALima <139362333+BrunoJMALima@users.noreply.github.com>
+Date:   Sat Dec 9 17:19:32 2023 -0300
+
+    Merge pull request #3 from Italo204/bruno
+    
+    Bruno
+
+[33mcommit 8e8d6e0d99bd7954e762e66aca0aec643430623a[m[33m ([m[1;31morigin/bruno[m[33m)[m
+Merge: 6a70419 e695282
+Author: BrunoJMALima <139362333+BrunoJMALima@users.noreply.github.com>
+Date:   Sat Dec 9 17:19:05 2023 -0300
+
+    Merge branch 'master' into bruno
+
+[33mcommit 6a7041901b14e700a6fd1e5af5cedaf5d2ad178c[m
+Author: BrunoJMALima <bj_mal@hotmail.com>
+Date:   Sat Dec 9 16:42:09 2023 -0300
+
+    deletado package entities
+
+[33mcommit de4007f70991bd53e923056428038ee816232e8f[m
+Author: BrunoJMALima <bj_mal@hotmail.com>
+Date:   Sat Dec 9 16:09:18 2023 -0300
+
+    interações entre telas finalizadas?
+
+[33mcommit e695282764437576b4839248d1645641511d350f[m
+Merge: a4e0748 f173932
+Author: Ita_San <147111398+Italo204@users.noreply.github.com>
+Date:   Sat Dec 9 13:35:49 2023 -0300
+
+    Merge pull request #1 from Italo204/italosm
+    
+    Italosm
+
+[33mcommit f173932d472d920bfdc556afa14c2b48ebfb45bf[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Sat Dec 9 13:34:29 2023 -0300
+
+    So falta integrar ao front!
+
+[33mcommit 0313689a644c98ef1afeb617d92428068db4f1bd[m
+Author: BrunoJMALima <bj_mal@hotmail.com>
+Date:   Fri Dec 8 20:36:43 2023 -0300
+
+    fiz a interação das telas agendamento
+
+[33mcommit 1cb419d83a773c4c90a0bd1926f35cb5471280c2[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Fri Dec 8 17:21:07 2023 -0300
+
+    Faltando Somente prontuario!
+
+[33mcommit 43fdc648f6a9b89aadbb836296163a614cc36bfe[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Fri Dec 1 10:31:51 2023 -0300
+
+    Começanco classes DAO, conexão feita com o bd, BaseForm introduzida!
+
+[33mcommit 9453428ede817420a821b0a64d217d59139496a4[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 30 12:59:03 2023 -0300
+
+    Banco de dados e pasta target!
+
+[33mcommit 4da181b92df831232acfcc7f31d49338f0601c5b[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Wed Nov 29 11:51:17 2023 -0300
+
+    Classe Atualizadas, Interface Prontuario e classe Prontuario criadas!
+
+[33mcommit efcf5f05be5b77edc63a760eef99b44fa5f5318b[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Mon Nov 27 08:54:55 2023 -0300
+
+    Telas do Bruno no projeto
+
+[33mcommit 5eba6376905aa2f9f18281c7ec21cb60667f6074[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Mon Nov 27 08:17:45 2023 -0300
+
+    Alterações e ediçoes das classes
+
+[33mcommit e785adc823bc8eaf07b0ae66f13c92ca94412b34[m
+Author: BrunoJMALima <bj_mal@hotmail.com>
+Date:   Thu Nov 23 21:36:09 2023 -0300
+
+    Atualizado telas: MenuPrincipal e Agendamento
+
+[33mcommit a3faca96167e8c9fcbce4f093dfcef8475212154[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 23 20:14:18 2023 -0300
+
+    Services e Interface CRUD corretos!
+
+[33mcommit 63646c74cda43d22d68f36dba4ba80477fd1c8e3[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 23 15:18:34 2023 -0300
+
+    Pacote Services e Interface CRUD completos!
+
+[33mcommit 6357171ecd93f5d7c57fc6e5786702acb2645d18[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Tue Nov 21 17:40:41 2023 -0300
+
+    CLASSES ENTIDADES PRONTAS
+
+[33mcommit 77088726a60bb7fbcb08cfdafb950dddf8f503f9[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Tue Nov 21 17:38:35 2023 -0300
+
+    Arquivos entidades prontos
+
+[33mcommit 298f9ef2585cd50ba276ad62248a20b4b7369bc7[m
+Author: BrunoJMALima <bj_mal@hotmail.com>
+Date:   Mon Nov 20 21:05:26 2023 -0300
+
+    Fiz as telas
+
+[33mcommit bda5f27a67c5ee911900ee80edd51d3bb40e7e50[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 16 21:45:07 2023 -0300
+
+    AGORA TA COMPLETO PFV
+
+[33mcommit 1c393488393fe07259ae07ab3e585484dc02225d[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 16 21:40:42 2023 -0300
+
+    Todos pacotes
+
+[33mcommit 228029ba0f8ed0772214c668cc5951b625512f50[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 16 21:36:42 2023 -0300
+
+    Entidades Melhor
+
+[33mcommit a4e0748e9fba1ffa78b002d30cfe8cb49dc3179d[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 16 20:59:35 2023 -0300
+
+    Adc Classes Entidades
+
+[33mcommit 86677e75db7945ac024351ee35baa40b67c41b76[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 16 20:11:18 2023 -0300
+
+    Commit certo
+
+[33mcommit cb10128d763c40a00206b5190b662491b3c1656c[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 16 20:10:55 2023 -0300
+
+    Commit corrigido
+
+[33mcommit 4630e99f6e3c9d057233b8a8756dcdd3265fd96c[m
+Author: Italo204 <italoosantos48@gmail.com>
+Date:   Thu Nov 16 20:00:29 2023 -0300
+
+    Primeiro commit
