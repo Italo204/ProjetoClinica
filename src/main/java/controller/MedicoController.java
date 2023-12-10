@@ -63,6 +63,14 @@ public class MedicoController {
             baseForm.showErrorInternal(e.getMessage());
             return null;
         }
-
+    }
+    
+    public ArrayList<Medico> searchForEspc(Medico medico) {
+        try {
+            return this.medicoServices.searchForEspc(medico.getID());
+        } catch (SQLException e) {
+            baseForm.showErrorInternal(e.getMessage());
+            return null;
+        }
     }
 }

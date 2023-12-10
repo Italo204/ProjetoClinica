@@ -3,26 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-
-import dao.EspecialidadeDAO;
 import entities.Especialidade;
+import entities.Medico;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import services.MedicoServices;
+import services.EspecialidadeServices;
 
 /**
  *
  * @author User
  */
 public class Agendamento extends javax.swing.JFrame {
-
+    public final EspecialidadeServices especialidadeServices;
+    public final MedicoServices medicoServices;
     /**
      * Creates new form Agendamento
      */
     public Agendamento() {
         initComponents();
+        this.especialidadeServices = new EspecialidadeServices();
+        this.medicoServices = new MedicoServices();
     }
 
     /**
@@ -41,7 +43,7 @@ public class Agendamento extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         cbespecialidade = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbmedico = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -91,8 +93,16 @@ public class Agendamento extends javax.swing.JFrame {
         });
         getContentPane().add(cbespecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 270, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, -1));
+        cbmedico.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cbmedicoAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        getContentPane().add(cbmedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,7 +182,7 @@ public class Agendamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-new MenuPrincipal().setVisible(true);        // TODO add your handling code here:
+        new MenuPrincipal().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cbespecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbespecialidadeActionPerformed
@@ -180,19 +190,37 @@ new MenuPrincipal().setVisible(true);        // TODO add your handling code here
     }//GEN-LAST:event_cbespecialidadeActionPerformed
 
     private void cbespecialidadeAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbespecialidadeAncestorAdded
-       EspecialidadeDAO espc = new EspecialidadeDAO();
+
         try {
-            ArrayList<Especialidade> listaEspc = espc.findAll();
+            ArrayList<Especialidade> listaEspc = this.especialidadeServices.findAllEspecialidades();
             
             cbespecialidade.removeAll();
             
             for(Especialidade e : listaEspc){
                 cbespecialidade.addItem(e);
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: "+ex.getMessage(), "ERRO CONEXAO", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage(), "ERRO CONEXAO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_cbespecialidadeAncestorAdded
+
+    private void cbmedicoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbmedicoAncestorAdded
+        // TODO add your handling code here:
+        Especialidade espc =(Especialidade) cbespecialidade.getSelectedItem();
+        long idEspc = espc.getID();
+        
+        try {
+            ArrayList<Medico> listaMed = this.medicoServices.searchForEspc(idEspc);
+            
+            cbmedico.removeAll();
+            
+            for(Medico m : listaMed){
+                cbmedico.addItem(m);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + e.getMessage(), "ERRO CONEXAO", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cbmedicoAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -231,9 +259,9 @@ new MenuPrincipal().setVisible(true);        // TODO add your handling code here
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbespecialidade;
+    private javax.swing.JComboBox cbmedico;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

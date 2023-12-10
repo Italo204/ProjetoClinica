@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import entities.Especialidade;
 import interfaces.IDatabaseCRUD;
+import java.sql.Connection;
 import utils.Database;
 
 public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
@@ -37,7 +38,7 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
         String sql = "SELECT * FROM ESPECIALIDADE WHERE IDEspecialidade = ?";
         PreparedStatement ps = null;
 
-        try{
+        try(Connection conn = Database.getConexao()){
             ps= Database.getConexao().prepareStatement(sql.toString());
             ps.setLong(1, id);
             ResultSet result = ps.executeQuery();
@@ -45,6 +46,8 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
             if (result.next()){
                 especialidade =  new Especialidade(result.getLong("IDEspecialidade"), result.getString("Especialidade"));
             }
+            ps.close();
+            result.close();
             return especialidade;
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -64,6 +67,7 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
             ps= Database.getConexao().prepareStatement(sql.toString());
             ps.setLong(1, id);
             int result = ps.executeUpdate();
+            ps.close();
             return result;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao deletar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -82,6 +86,7 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
             ps.setString(1, especialidade.getNome());;
             ps.setLong(2, especialidade.getID());
             int result = ps.executeUpdate();
+            ps.close();
             return result;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -107,6 +112,8 @@ public class EspecialidadeDAO implements IDatabaseCRUD<Especialidade> {
                 Especialidade especialidades = new Especialidade(id, nome);
                 especialidade.add(especialidades);
             }
+            ps.close();
+            rs.close();
             return especialidade;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

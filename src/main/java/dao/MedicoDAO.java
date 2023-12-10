@@ -12,14 +12,15 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import entities.Medico;
-import interfaces.IDatabaseCRUD;
+import interfaces.IDatabaseCRUDMedico;
+import java.sql.Connection;
 import utils.Database;
 
 /**
  *
  * @author italo-santos-mendes
  */
-public class MedicoDAO implements IDatabaseCRUD<Medico>{
+public class MedicoDAO implements IDatabaseCRUDMedico<Medico>{
     
 
     @Override
@@ -52,7 +53,7 @@ public class MedicoDAO implements IDatabaseCRUD<Medico>{
     }
 
     @Override
-    public Medico search(Long id) throws SQLException {
+    public Medico search(long id) throws SQLException {
         
         String sql = "SELECT IDMedico, Telefone, CPF, Sexo, Email, Nome, Senha, Nascimento FROM medico WHERE IDMedico = ?";
         PreparedStatement ps = null;
@@ -66,6 +67,8 @@ public class MedicoDAO implements IDatabaseCRUD<Medico>{
                 medico =  new Medico(result.getLong("IDMedico"), result.getString("Telefone"), result.getString("CPF"),result.getString("Sexo"),
                 result.getString("Email"), result.getString("Nome"), result.getString("Senha"), result.getDate("Nascimento").toLocalDate());
             }
+            ps.close();
+            result.close();
             return medico;
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -76,13 +79,14 @@ public class MedicoDAO implements IDatabaseCRUD<Medico>{
     }
     
     @Override
-    public int delete(Long id) throws SQLException{
+    public int delete(long id) throws SQLException{
         String sql = "DELETE FROM medico WHERE IDMedico = ?";
         PreparedStatement ps = null;
         try{
             ps = Database.getConexao().prepareStatement(sql.toString());
             ps.setLong(1, id);
             int result = ps.executeUpdate();
+            ps.close();
             return result;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -121,6 +125,7 @@ public class MedicoDAO implements IDatabaseCRUD<Medico>{
             ps.setLong(index, id);
 
             int result = ps.executeUpdate();
+            ps.close();
 
             return result;
             
@@ -156,14 +161,50 @@ public class MedicoDAO implements IDatabaseCRUD<Medico>{
                 Medico medicos = new Medico(id, nome, email, senha, cpf, telefone, sexo, nascimento);
                 medico.add(medicos);
             }
+            ps.close();
+            rs.close();
             return medico;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERRO: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
-        } finally {
-            Database.closeConnection();
         }
-
+           Connection con = Database.closeConnection();
         
     }
+    
+    @Override
+    public ArrayList<Medico> searchForEspc(long ID) throws SQLException {
+        String sql = "SELECT IDMedico, Telefone, CPF, Sexo, Email, Nome, Senha, Nascimento FROM medico WHERE IDEspecialidade = ?";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Database.getConexao().prepareStatement(sql.toString());
+            ps.setLong(1,ID);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Medico> medico = new ArrayList<>();
+            while (rs.next()) {
+                long id = rs.getLong("IDMedico");
+                String telefone = rs.getString("Telefone");
+                String cpf = rs.getString("CPF");
+                String sexo = rs.getString("sexo");
+                String email = rs.getString("Email");
+                String nome = rs.getString("Nome");
+                String senha = rs.getString("Senha");
+                LocalDate nascimento = rs.getDate("Nascimento").toLocalDate();
+
+                Medico medicos = new Medico(id, nome, email, senha,cpf, telefone, sexo, nascimento);
+                medico.add(medicos);
+            }
+            ps.close();
+            rs.close();
+            return medico;
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+
 }
+ 

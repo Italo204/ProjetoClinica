@@ -44,5 +44,9 @@ public class MedicoServices {
     public ArrayList<Medico> findAllMedicos() throws SQLException {
         return this.MedicoDAO.findAll();
     }
+    
+    public ArrayList<Medico> searchForEspc(long ID) throws SQLException {
+        return this.MedicoDAO.searchForEspc(ID);
+    }
 
 }

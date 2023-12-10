@@ -23,5 +23,5 @@ public interface IDatabaseCRUDMedico<T> {
 
     ArrayList<T> findAll() throws SQLException;
     
-    ArrayList<T> searchForEspc(long id) throws SQLException;
+    ArrayList<T> searchForEspc(long ID) throws SQLException;
 }

@@ -22,7 +22,7 @@ public class Database {
                 return con;
             }
         } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR IN DATABASE: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERRO NO BANCO DE DADOS: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -34,6 +34,8 @@ public class Database {
             }
         } catch(SQLException e){
             e.printStackTrace();
+        } finally {
+            con = null;
         }
     }
 }
