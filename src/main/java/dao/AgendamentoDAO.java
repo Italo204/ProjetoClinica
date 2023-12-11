@@ -66,6 +66,8 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
                 result.getString("observacoes"), result.getString("TipoConsulta"), result.getString("NomeMedico"), 
                 result.getString("NomeConvenio"), result.getString("Nome"), result.getTime("hora").toLocalTime());
             }
+            ps.close();
+            result.close();
             return agendamento;
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -84,6 +86,7 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
             ps = Database.getConexao().prepareStatement(sql.toString());
             ps.setLong(1, id);
             int result = ps.executeUpdate();
+            ps.close();
             return result;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao deletar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -110,6 +113,7 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
             ps.setString(3, agendamento.getTipoConsulta());
             ps.setLong(4, agendamento.getID());
             int result = ps.executeUpdate();
+            ps.close();
             return result;
 
         } catch (SQLException e) {
@@ -149,6 +153,8 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
                 Agendamento agendamentos = new Agendamento(id, dia, cpf, observacao, TipoConsulta, Medico, convenio, nome, hora);
                 agendamento.add(agendamentos);
             }
+            ps.close();
+            rs.close();
             return agendamento;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

@@ -9,11 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+import java.util.Map;
 import javax.swing.JOptionPane;
 import entities.Medico;
 import interfaces.IDatabaseCRUDMedico;
-import java.sql.Connection;
 import utils.Database;
 
 /**
@@ -46,7 +45,7 @@ public class MedicoDAO implements IDatabaseCRUDMedico<Medico>{
             ps.close();
 
         } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         } finally {
             Database.closeConnection();
         }
@@ -98,8 +97,7 @@ public class MedicoDAO implements IDatabaseCRUDMedico<Medico>{
     }
 
     @Override
-    public int update(Medico medico) throws SQLException{
-        long id = medico.getID();
+    public int update(long id, Map<String, Object> atualizacoes) throws SQLException{
 
         if (atualizacoes.isEmpty()) {
             JOptionPane.showMessageDialog(null, "NENHUMA ATUALIZAÇÂO PENDENTE!", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -130,7 +128,7 @@ public class MedicoDAO implements IDatabaseCRUDMedico<Medico>{
             return result;
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 
             return -1;
         } finally {
@@ -165,10 +163,12 @@ public class MedicoDAO implements IDatabaseCRUDMedico<Medico>{
             rs.close();
             return medico;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERRO: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
+        } finally {
+            Database.closeConnection();
         }
-           Connection con = Database.closeConnection();
+           
         
     }
     
@@ -201,8 +201,10 @@ public class MedicoDAO implements IDatabaseCRUDMedico<Medico>{
             return medico;
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
+        } finally {
+            Database.closeConnection();
         }
     }
 

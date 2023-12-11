@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import dao.PacienteDAO;
 import entities.Paciente;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -32,8 +33,8 @@ public class PacienteServices{
         return this.PacienteDAO.delete(id);
     }
 
-    public int updatePaciente(Paciente paciente) throws SQLException {
-        return this.PacienteDAO.update(paciente);
+    public int updatePaciente(long id, Map<String, Object> atualizacoes) throws SQLException {
+        return this.PacienteDAO.update(id, atualizacoes);
     }
 
     public ArrayList<Paciente> findAllPaciente() throws SQLException {

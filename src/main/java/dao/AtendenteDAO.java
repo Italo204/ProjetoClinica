@@ -4,17 +4,15 @@
  */
 package dao;
 
-import interfaces.IDatabaseCRUD;
-
-import static javax.swing.JOptionPane.showInternalInputDialog;
-
-import java.sql.Connection;
+import interfaces.IDatabaseCRUDHash;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
+
 import javax.swing.JOptionPane;
 
 import entities.Atendente;
@@ -27,7 +25,7 @@ import utils.Database;
  * @author italo-santos-mendes
  */
 
-public class AtendenteDAO implements IDatabaseCRUD<Atendente>{
+public class AtendenteDAO implements IDatabaseCRUDHash<Atendente>{
 
     @Override
     public void save(Atendente atendente) throws SQLException {
@@ -52,7 +50,7 @@ public class AtendenteDAO implements IDatabaseCRUD<Atendente>{
             ps.close();
 
         } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         } finally {
             Database.closeConnection();
         }
@@ -73,6 +71,8 @@ public class AtendenteDAO implements IDatabaseCRUD<Atendente>{
                 atendente =  new Atendente(result.getLong("IDAtendente"), result.getString("nome"), result.getString("email"),result.getString("senha"),
                 result.getString("CPF"), result.getString("telefone"), result.getString("sexo"), result.getDate("nascimento").toLocalDate());
             }
+            ps.close();
+            result.close();
             return atendente;
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -90,6 +90,7 @@ public class AtendenteDAO implements IDatabaseCRUD<Atendente>{
             ps = Database.getConexao().prepareStatement(sql.toString());
             ps.setLong(1, id);
             int result = ps.executeUpdate();
+            ps.close();
             return result;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -101,8 +102,7 @@ public class AtendenteDAO implements IDatabaseCRUD<Atendente>{
     }
 
     @Override
-    public int update(Atendente atendente) throws SQLException{
-        long id = atendente.getID();
+    public int update(long id, Map<String, Object> atualizacoes) throws SQLException{
 
         if (atualizacoes.isEmpty()) {
             JOptionPane.showMessageDialog(null, "NENHUMA ATUALIZAÇÂO PENDENTE!", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -129,10 +129,11 @@ public class AtendenteDAO implements IDatabaseCRUD<Atendente>{
 
             int result = ps.executeUpdate();
 
+            ps.close();
             return result;
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 
             return -1;
         } finally {
@@ -163,9 +164,11 @@ public class AtendenteDAO implements IDatabaseCRUD<Atendente>{
                 Atendente atendentes = new Atendente(id, nome, email, senha, cpf, telefone, sexo, nascimento);
                 atendente.add(atendentes);
             }
+            ps.close();
+            rs.close();
             return atendente;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERRO: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             Database.closeConnection();

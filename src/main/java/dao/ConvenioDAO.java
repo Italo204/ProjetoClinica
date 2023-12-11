@@ -52,6 +52,8 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
             if (result.next()){
                 convenio =  new Convenio(result.getLong("IDConvenio"), result.getString("Nome"), result.getDate("DataInicio").toLocalDate(),result.getDate("DataTermino").toLocalDate(), result.getString("CNPJ"));
             }
+            ps.close();
+            result.close();
             return convenio;
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -71,6 +73,7 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
             ps= Database.getConexao().prepareStatement(sql.toString());
             ps.setLong(1, id);
             int result = ps.executeUpdate();
+            ps.close();
             return result;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao deletar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -95,6 +98,7 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
             ps.setDate(3, dataTerminoSQL);
             ps.setLong(4, convenio.getID());
             int result = ps.executeUpdate();
+            ps.close();
             return result;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -125,6 +129,8 @@ public class ConvenioDAO implements IDatabaseCRUD<Convenio>{
                 Convenio convenios = new Convenio(id, nome, dataInicio, dataTermino, cnpj);
                 convenio.add(convenios);
             }
+            ps.close();
+            rs.close();
             return convenio;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

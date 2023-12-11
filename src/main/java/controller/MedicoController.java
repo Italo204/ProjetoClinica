@@ -9,6 +9,7 @@ import View.BaseForm;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import entities.Medico;
 /**
@@ -32,9 +33,9 @@ public class MedicoController {
         }
     }
 
-    public void updateMedico(Medico medico){
+    public void updateMedico(long id, Map<String, Object> atualizacoes){
         try {
-            this.medicoServices.updateMedico(medico);
+            this.medicoServices.updateMedico(id, atualizacoes);
         } catch (SQLException e) {
             baseForm.showErrorInternal(e.getMessage());
         }

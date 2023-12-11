@@ -6,6 +6,7 @@ package controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import entities.Paciente;
 import services.PacienteServices;
@@ -40,9 +41,9 @@ public class PacienteController {
         }
     }
 
-    public void updatePaciente(Paciente paciente) {
+    public void updatePaciente(long id, Map<String, Object> atualizacoes) {
         try {
-            this.pacienteServices.updatePaciente(paciente);
+            this.pacienteServices.updatePaciente(id, atualizacoes);
         } catch (SQLException e) {
             baseForm.showErrorInternal(e.getMessage());
         }

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import dao.MedicoDAO;
 import entities.Medico;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 
@@ -37,8 +38,8 @@ public class MedicoServices {
         return this.MedicoDAO.search(id);
     }
 
-    public int updateMedico(Medico medico) throws SQLException {
-        return this.MedicoDAO.update(medico);
+    public int updateMedico(long id, Map<String, Object> atualizacoes) throws SQLException {
+        return this.MedicoDAO.update(id, atualizacoes);
     }
 
     public ArrayList<Medico> findAllMedicos() throws SQLException {

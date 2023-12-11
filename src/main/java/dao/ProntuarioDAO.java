@@ -48,6 +48,8 @@ public class ProntuarioDAO implements IProntuarioCRUD<Prontuario> {
                 prontuario = new Prontuario(rs.getLong("IDProntuario"), rs.getString("Historico"), rs.getString("Receituario"), 
                 rs.getString("Exames"), rs.getString("NomePaciente"));
             }
+            ps.close();
+            rs.close();
             return prontuario;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -66,6 +68,7 @@ public class ProntuarioDAO implements IProntuarioCRUD<Prontuario> {
             ps =  Database.getConexao().prepareStatement(sql.toString());
             ps.setLong(1, id);
             int result = ps.executeUpdate();
+            ps.close();
             return result;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao deletar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -88,6 +91,7 @@ public class ProntuarioDAO implements IProntuarioCRUD<Prontuario> {
             ps.setLong(4, prontuario.getId());
 
             int result = ps.executeUpdate();
+            ps.close();
             return result;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -117,6 +121,8 @@ public class ProntuarioDAO implements IProntuarioCRUD<Prontuario> {
                 prontuario.add(prontuarios);
             }
 
+            ps.close();
+            rs.close();
             return prontuario;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

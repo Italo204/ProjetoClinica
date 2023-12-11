@@ -6,6 +6,7 @@ package controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import entities.Atendente;
 import services.AtendenteServices;
@@ -33,9 +34,9 @@ public class AtendenteController {
         }
     }
 
-    public void updateAtendente(Atendente atendente) {
+    public void updateAtendente(long id, Map<String, Object> atualizacoes) {
         try {
-            this.atendenteServices.updateAtendete(atendente);
+            this.atendenteServices.updateAtendente(id, atualizacoes);
         } catch (SQLException e) {
             baseForm.showErrorInternal(e.getMessage());
         }

@@ -2,6 +2,8 @@ package entities;
 
 import java.time.LocalDate;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public abstract class Pessoa {
     protected long ID;
     protected String nome;
@@ -68,10 +70,12 @@ public abstract class Pessoa {
     }
 
     public String getSenha() {
+
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(String senhaBase) {
+        String senha = BCrypt.hashpw(senhaBase, BCrypt.gensalt());
         this.senha = senha;
     }
 

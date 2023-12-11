@@ -6,6 +6,7 @@ package interfaces;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -19,7 +20,7 @@ public interface IDatabaseCRUDMedico<T> {
 
     void save(T entity) throws SQLException;
 
-    int update(T entity) throws SQLException;
+    int update(long id, Map<String, Object> atualizacoes) throws SQLException;
 
     ArrayList<T> findAll() throws SQLException;
     
