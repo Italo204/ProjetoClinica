@@ -26,7 +26,7 @@ public class LoginController {
             ps.close();
             rs.close();
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "CPF OU SENHA INCORRETOS!" + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "CPF OU SENHA INCORRETOS!", "ERRO", JOptionPane.ERROR_MESSAGE);
         } finally {
             Database.closeConnection();
         }

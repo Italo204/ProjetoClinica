@@ -4,6 +4,8 @@
  */
 package View;
 
+import javax.swing.event.MenuKeyEvent;
+
 import controller.LoginController;
 
 /**
@@ -87,8 +89,9 @@ public class TelaLogin extends javax.swing.JFrame {
         LoginController login = new LoginController();
         boolean autenticar = login.autenticarUser(CPF, senha);
         
-        if(autenticar) {
-            new MenuPrincipal().setVisible(true);
+        if(autenticar == true) {
+            MenuPrincipal menuPrincipal = new MenuPrincipal();
+            menuPrincipal.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_ButtonEntrarActionPerformed
