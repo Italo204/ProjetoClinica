@@ -61,7 +61,7 @@ public class Agendamento extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setText("VOLTAR");
@@ -182,7 +182,8 @@ public class Agendamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new MenuPrincipal().setVisible(true);        // TODO add your handling code here:
+        new MenuPrincipal().setVisible(true); 
+        this.dispose();       // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cbespecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbespecialidadeActionPerformed
