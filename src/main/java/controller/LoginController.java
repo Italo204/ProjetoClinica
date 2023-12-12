@@ -19,7 +19,6 @@ public class LoginController {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 String senhaBanco = rs.getString("senha");
-                String cargo = rs.getString("cargo");
                 if (BCrypt.checkpw(senha, senhaBanco)) {
                     return true;
                 }

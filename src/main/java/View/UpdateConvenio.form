@@ -161,7 +161,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial Black" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cadastro Conv&#xea;nio"/>
+        <Property name="text" type="java.lang.String" value="Atualizar Conv&#xea;nio"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
@@ -173,11 +173,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonVoltar">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\Bruno\voltar (1).png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVoltarActionPerformed"/>
       </Events>
