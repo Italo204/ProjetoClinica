@@ -1,11 +1,8 @@
 package controller;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import javax.swing.JOptionPane;
-
 import org.mindrot.jbcrypt.BCrypt;
-
 import utils.Database;
 
 public class LoginController {
@@ -19,7 +16,7 @@ public class LoginController {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 String senhaBanco = rs.getString("senha");
-                if (BCrypt.checkpw(senha, senhaBanco)) {
+                if (senha.equals(senhaBanco)) {
                     return true;
                 }
             }
@@ -31,5 +28,14 @@ public class LoginController {
             Database.closeConnection();
         }
         return false;
+    }
+
+    public boolean validarSenha(String senha) {
+        if (senha.matches(".*[\\s-].*")) {
+            JOptionPane.showMessageDialog(null, "Senha não pode conter espaços ou traços!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            return true;
+        }
     }
 }

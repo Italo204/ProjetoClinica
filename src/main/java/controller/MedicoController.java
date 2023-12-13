@@ -5,8 +5,7 @@
 package controller;
 
 import services.MedicoServices;
-import View.BaseForm;
-
+import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -18,18 +17,16 @@ import entities.Medico;
  */
 public class MedicoController {
     private final MedicoServices medicoServices;
-    private final BaseForm baseForm;
 
-    public MedicoController(BaseForm bForm){
+    public MedicoController(){
         this.medicoServices = new MedicoServices();
-        this.baseForm = bForm;
     }
     
     public void saveMedico(Medico medico) {
         try{
             this.medicoServices.addMedico(medico);
         } catch(SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -37,7 +34,7 @@ public class MedicoController {
         try {
             this.medicoServices.updateMedico(id, atualizacoes);
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -45,7 +42,7 @@ public class MedicoController {
         try {
             this.medicoServices.deleteMedico(medico.getID());
         } catch(SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -53,7 +50,7 @@ public class MedicoController {
         try {
             this.medicoServices.searchMedico(medico.getID());
         } catch (SQLException e){
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -61,17 +58,25 @@ public class MedicoController {
         try{
             return this.medicoServices.findAllMedicos();
         } catch(SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
     
-    public ArrayList<Medico> searchForEspc(Medico medico) {
+    public ArrayList<Medico> searchForEspc(long id) {
         try {
-            return this.medicoServices.searchForEspc(medico.getID());
+            return this.medicoServices.searchForEspc(id);
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
+        }
+    }
+    
+    public void updateForEspc(long id, long idmed) {
+        try {
+            this.medicoServices.updateForEspc(id, idmed);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

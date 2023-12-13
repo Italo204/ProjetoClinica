@@ -7,10 +7,10 @@ package controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
-
+import javax.swing.JOptionPane;
 import entities.Paciente;
 import services.PacienteServices;
-import View.BaseForm;
+
 
 /**
  *
@@ -18,18 +18,16 @@ import View.BaseForm;
  */
 public class PacienteController {
     private final PacienteServices pacienteServices;
-    private final BaseForm baseForm;
 
-    public PacienteController(BaseForm bform) {
+    public PacienteController() {
         this.pacienteServices = new PacienteServices();
-        this.baseForm = bform;
     }
 
     public void savePaciente(Paciente paciente) {
         try{
             this.pacienteServices.addPaciente(paciente);
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -37,7 +35,7 @@ public class PacienteController {
         try {
             this.pacienteServices.deletePaciente(paciente.getID());
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -45,7 +43,7 @@ public class PacienteController {
         try {
             this.pacienteServices.updatePaciente(id, atualizacoes);
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -53,7 +51,7 @@ public class PacienteController {
         try {
             this.pacienteServices.searchPaciente(paciente.getID());
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -61,7 +59,7 @@ public class PacienteController {
         try {
             return this.pacienteServices.findAllPaciente();
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

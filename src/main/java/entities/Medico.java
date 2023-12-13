@@ -11,10 +11,28 @@ import java.time.LocalDate;
  * @author italo-santos-mendes
  */
 public class Medico extends Pessoa {
+    private long IDEspecialidade;
 
       public Medico(long ID, String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento) {
         super(ID, nome, email, senha, CPF, telefone, sexo, nascimento);
+        
     }
+
+        
+      
+    public Medico(long ID, String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento, long IDEspecialidade) {
+        super(ID, nome, email, senha, CPF, telefone, sexo, nascimento);
+        this.IDEspecialidade = IDEspecialidade;
+    }
+      
+      public long getIDEspecialidade() {
+        return IDEspecialidade;
+    }
+
+    public void setIDEspecialidade(long IDEspecialidade) {
+        this.IDEspecialidade = IDEspecialidade;
+    }
+      
 
     @Override
     public String toString(){

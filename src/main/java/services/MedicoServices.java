@@ -49,5 +49,9 @@ public class MedicoServices {
     public ArrayList<Medico> searchForEspc(long ID) throws SQLException {
         return this.MedicoDAO.searchForEspc(ID);
     }
+    
+    public int updateForEspc(long id, long IDMedico) throws SQLException {
+        return this.MedicoDAO.updateForEspc(id, IDMedico);
+    }
 
 }

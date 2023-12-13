@@ -2,24 +2,23 @@ package controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import entities.Convenio;
 import services.ConvenioServices;
-import View.BaseForm;
 
 public class ConvenioController {
     private final ConvenioServices convenioServices;
-    private final BaseForm baseForm;
 
-    public ConvenioController(BaseForm bform) {
+    public ConvenioController() {
         this.convenioServices = new ConvenioServices();
-        this.baseForm = bform;
     }
 
     public void addConvenio(Convenio convenio) {
         try {
             this.convenioServices.addConvenio(convenio);
         }catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -27,7 +26,7 @@ public class ConvenioController {
         try {
             this.convenioServices.deleteConvenio(convenio.getID());
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -35,7 +34,7 @@ public class ConvenioController {
         try{
             this.convenioServices.searchConvenio(convenio.getID());
         } catch(SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -43,7 +42,7 @@ public class ConvenioController {
         try {
             this.convenioServices.updateConvenio(convenio);
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -51,7 +50,7 @@ public class ConvenioController {
         try {
             return this.convenioServices.findAllConvenios();
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

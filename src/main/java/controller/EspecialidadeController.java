@@ -3,24 +3,24 @@ package controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import entities.Especialidade;
 import services.EspecialidadeServices;
-import View.BaseForm;
+
 
 public class EspecialidadeController {
     private final EspecialidadeServices especialidadeServices;
-    private final BaseForm baseForm;
 
-    public EspecialidadeController(BaseForm bform) {
+    public EspecialidadeController() {
         this.especialidadeServices = new EspecialidadeServices();
-        this.baseForm = bform;
     }
 
     public void addEspecialidade(Especialidade especialidade) {
         try {
             this.especialidadeServices.addEspecialidade(especialidade);
         }catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -28,7 +28,7 @@ public class EspecialidadeController {
         try {
             this.especialidadeServices.deleteEspecialidade(especialidade.getID());
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -36,7 +36,7 @@ public class EspecialidadeController {
         try{
             this.especialidadeServices.searchEspecialidade(especialidade.getID());
         } catch(SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -44,7 +44,7 @@ public class EspecialidadeController {
         try {
             this.especialidadeServices.updateEspecialidade(especialidade);
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -52,7 +52,7 @@ public class EspecialidadeController {
         try {
             return this.especialidadeServices.findAllEspecialidades();
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

@@ -18,7 +18,7 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
     public void save(Agendamento agendamento) throws SQLException {
         LocalDate DataAgendamento = agendamento.getData();
         LocalTime horaTime = agendamento.getHora();
-        String sql = "INSERT INTO agendamento(DATA, CPF, OBSERVACAO, TIPOCONSULTA, MEDICO, CONVENIO, NOME, HORA) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ;";
+        String sql = "INSERT INTO agendamento(DATA, CPF, OBSERVACAO, TIPOCONSULTA, MEDICO, CONVENIO, NOME, HORA, ESPECIALIDADE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ;";
         PreparedStatement ps = null;
 
         Date data = Date.valueOf(DataAgendamento);
@@ -34,6 +34,7 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
             ps.setString(6, agendamento.getConvenio());
             ps.setString(7, agendamento.getNome());
             ps.setTime(8, hora);
+            ps.setString(9, agendamento.getEspecialidade());
 
             ps.executeUpdate();
             ps.close();
@@ -48,7 +49,7 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
     @Override
     public Agendamento search(Long id) throws SQLException {
         String sql = "SELECT A.IDAgendamento, A.Dia, P.CPF, A.observacoes, A.TipoConsulta, " +
-        "M.Nome AS NomeMedico, C.Nome AS NomeConvenio, P.Nome AS NomePaciente, A.hora " +
+        "M.Nome AS NomeMedico, C.Nome AS NomeConvenio, P.Nome AS NomePaciente, A.hora, A.especialidade " +
         "FROM Agendamento A "+
         "JOIN PACIENTE P ON A.IDPaciente = P.IDPaciente "+
         "LEFT JOIN Medico M ON A.IDMedico = M.IDMedico "+
@@ -64,7 +65,7 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
             if (result.next()){
                 agendamento =  new Agendamento(result.getLong("IDAgendamento"), result.getDate("Dia").toLocalDate(), result.getString("CPF"), 
                 result.getString("observacoes"), result.getString("TipoConsulta"), result.getString("NomeMedico"), 
-                result.getString("NomeConvenio"), result.getString("Nome"), result.getTime("hora").toLocalTime());
+                result.getString("NomeConvenio"), result.getString("Nome"), result.getTime("hora").toLocalTime(), result.getString("especialidade"));
             }
             ps.close();
             result.close();
@@ -127,7 +128,7 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
     @Override
     public ArrayList<Agendamento> findAll() throws SQLException {
         String sql = "SELECT A.IDAgendamento, A.Dia, P.CPF, A.observacoes, A.TipoConsulta, " +
-        "M.Nome AS NomeMedico, C.Nome AS NomeConvenio, P.Nome AS NomePaciente, A.hora " +
+        "M.Nome AS NomeMedico, C.Nome AS NomeConvenio, P.Nome AS NomePaciente, A.hora, A.especialidade " +
         "FROM Agendamento A "+
         "JOIN PACIENTE P ON A.IDPaciente = P.IDPaciente "+
         "LEFT JOIN Medico M ON A.IDMedico = M.IDMedico "+
@@ -149,8 +150,9 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
                 String convenio = rs.getString("Convenio");
                 String nome = rs.getString("Nome");
                 LocalTime hora = rs.getTime("hora").toLocalTime();
+                String especialidade = rs.getString("especialidade");
 
-                Agendamento agendamentos = new Agendamento(id, dia, cpf, observacao, TipoConsulta, Medico, convenio, nome, hora);
+                Agendamento agendamentos = new Agendamento(id, dia, cpf, observacao, TipoConsulta, Medico, convenio, nome, hora, especialidade);
                 agendamento.add(agendamentos);
             }
             ps.close();
@@ -159,6 +161,25 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
+        } finally {
+            Database.closeConnection();
+        }
+    }
+
+    public boolean checkUser(String CPF) throws SQLException {
+        String sql = "SELECT * FROM PACIENTE WHERE CPF = ?";
+        try(PreparedStatement ps = Database.getConexao().prepareStatement(sql.toString());){
+            
+            ps.setString(1, CPF);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Paciente não encontrado. Realizar Cadastro! ", "Erro", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
         } finally {
             Database.closeConnection();
         }

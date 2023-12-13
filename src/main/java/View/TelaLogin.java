@@ -4,7 +4,9 @@
  */
 package View;
 
+import javax.swing.JFormattedTextField;
 import javax.swing.event.MenuKeyEvent;
+import javax.swing.text.MaskFormatter;
 
 import controller.LoginController;
 
@@ -19,6 +21,7 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+        configureCpfField();
     }
 
     /**
@@ -42,69 +45,74 @@ public class TelaLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-
+        ButtonEntrar.setBackground(new java.awt.Color(0, 153, 0));
+        ButtonEntrar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        ButtonEntrar.setForeground(new java.awt.Color(255, 255, 255));
         ButtonEntrar.setText("Entrar");
         ButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonEntrarActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
-        getContentPane().add(UserPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 180, -1));
+        getContentPane().add(ButtonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 100, 60));
+        getContentPane().add(UserPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 180, -1));
 
-        UserTextField.addActionListener(new java.awt.event.ActionListener() {
-
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonEntrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ButtonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
-        getContentPane().add(UserPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 180, -1));
-
-        UserTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UserTextFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(UserTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 180, -1));
+        
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Senha");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Usuário");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Login");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 100, 50));
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("  Login");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, 100));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 290, 240));
+
+        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imagens/TelaLogin1.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-200, -10, 670, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UserTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UserTextFieldActionPerformed
+    private void configureCpfField(){
+        try {
+            MaskFormatter mask = new MaskFormatter("###.###.###-##");
+            
+
+            UserTextField = new JFormattedTextField(mask);
+            UserTextField.setColumns(14);
+
+            getContentPane().add(UserTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, -1));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void ButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEntrarActionPerformed
-        String CPF = UserTextField.getText();
+        String CPF = UserTextField.getText().replaceAll("[^0-9]", "");
         char[] charSenha = UserPassword.getPassword();
         String senha = new String(charSenha);
         LoginController login = new LoginController();
-        boolean autenticar = login.autenticarUser(CPF, senha);
-        
-        if(autenticar == true) {
+        boolean senhaValida = login.validarSenha(senha);
+
+        if (senhaValida == true){
+            boolean autenticar = login.autenticarUser(CPF, senha);
+            if(autenticar == true) {
             MenuPrincipal menuPrincipal = new MenuPrincipal();
             menuPrincipal.setVisible(true);
             this.dispose();
-        }
+            }
+        }       
     }//GEN-LAST:event_ButtonEntrarActionPerformed
 
     /**

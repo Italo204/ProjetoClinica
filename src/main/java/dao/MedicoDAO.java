@@ -207,6 +207,25 @@ public class MedicoDAO implements IDatabaseCRUDMedico<Medico>{
             Database.closeConnection();
         }
     }
+    
+    public int updateForEspc(long ID, long IDMedico) throws SQLException {
+        String sql = "UPDATE Medico SET IDEspecialidade = ? WHERE IDMedico = ?";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Database.getConexao().prepareStatement(sql.toString());
+            ps.setLong(1, ID);
+            ps.setLong(2, IDMedico);
+            int result = ps.executeUpdate();
+            ps.close();
+            return result;
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+        
+    }
 
 }
  

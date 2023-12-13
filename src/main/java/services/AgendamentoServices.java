@@ -32,4 +32,9 @@ public class AgendamentoServices {
     public ArrayList<Agendamento> findAllAgendamentos() throws SQLException {
         return this.AgendamentoDAO.findAll();
     }
+
+    public boolean checkUser(String CPF) throws SQLException{
+        return this.AgendamentoDAO.checkUser(CPF);
+    }
+
 }

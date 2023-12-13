@@ -13,9 +13,10 @@ public class Agendamento {
     private String medico;
     private String convenio;
     private String nome;
+    private String especialidade;
 
     public Agendamento(long ID, LocalDate data, String CPF, String observacao, String tipoConsulta, String medico,
-            String convenio, String nome, LocalTime hora) {
+            String convenio, String nome, LocalTime hora, String especialidade) {
         this.Data = data;
         this.CPF = CPF;
         this.Observacao = observacao;
@@ -25,7 +26,25 @@ public class Agendamento {
         this.nome = nome;
         this.ID = ID;
         this.hora = hora;
+        this.especialidade = especialidade;
     }
+
+    
+
+    public Agendamento(LocalDate data, LocalTime hora, String CPF, String observacao, String tipoConsulta,
+            String medico, String convenio, String nome, String especialidade) {
+        this.Data = data;
+        this.hora = hora;
+        this.CPF = CPF;
+        this.Observacao = observacao;
+        this.tipoConsulta = tipoConsulta;
+        this.medico = medico;
+        this.convenio = convenio;
+        this.nome = nome;
+        this.especialidade = especialidade;
+    }
+
+
 
     public long getID() {
         return ID;
@@ -33,6 +52,14 @@ public class Agendamento {
 
     public void setID(long iD) {
         this.ID = iD;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
     }
 
     public LocalDate getData() {

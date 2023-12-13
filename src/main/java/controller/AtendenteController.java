@@ -7,10 +7,9 @@ package controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
-
+import javax.swing.JOptionPane;
 import entities.Atendente;
 import services.AtendenteServices;
-import View.BaseForm;
 
 /**
  *
@@ -19,18 +18,16 @@ import View.BaseForm;
 public class AtendenteController {
 
     private final AtendenteServices atendenteServices;
-    private final BaseForm baseForm;
 
-    public AtendenteController(BaseForm bForm){
+    public AtendenteController(){
         this.atendenteServices = new AtendenteServices();
-        this.baseForm = bForm;
     }
 
     public void saveAtendente(Atendente atendente){
         try {
             this.atendenteServices.addAtendente(atendente);
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -38,7 +35,7 @@ public class AtendenteController {
         try {
             this.atendenteServices.updateAtendente(id, atualizacoes);
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -46,7 +43,7 @@ public class AtendenteController {
         try {
             this.atendenteServices.deleteAtendente(atendente.getID());
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -54,7 +51,7 @@ public class AtendenteController {
         try {
             this.atendenteServices.searchAtendente(atendente.getID());
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -62,7 +59,7 @@ public class AtendenteController {
         try {
             return this.atendenteServices.findAllAtendentes();
         } catch (SQLException e) {
-            baseForm.showErrorInternal(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
