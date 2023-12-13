@@ -72,7 +72,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Bruno\\BarberShop Material\\View\\imagens\\painel-login.png")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 290, 240));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Bruno\\TelaLogin1.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/TelaLogin1.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-200, -10, 670, 370));
 
         pack();
