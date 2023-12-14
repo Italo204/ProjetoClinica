@@ -11,6 +11,12 @@ import java.time.LocalDate;
  */
 
 public class Atendente extends Pessoa{
+
+    public Atendente(String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento) {
+        super(nome, email, senha, CPF, telefone, sexo, nascimento);
+    }
+    
+    
     
     public Atendente (long ID, String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento) {
         super(ID, nome, email, senha, CPF, telefone, sexo, nascimento);

@@ -18,6 +18,10 @@ public class Paciente extends Pessoa{
         super(ID, nome, email, CPF, telefone, sexo, nascimento);
     }
 
+    public Paciente(String nome, String email, String CPF, String telefone, String sexo, LocalDate nascimento) {
+        super(nome, email, CPF, telefone, sexo, nascimento);
+    }
+
     @Override
     public String toString(){
         return this.nome;

@@ -13,12 +13,15 @@ import java.time.LocalDate;
 public class Medico extends Pessoa {
     private long IDEspecialidade;
 
-      public Medico(long ID, String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento) {
+    public Medico(String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento, long IDEspecialidade) {
+        super(nome, email, senha, CPF, telefone, sexo, nascimento);
+        this.IDEspecialidade = IDEspecialidade;
+    }
+
+    public Medico(long ID, String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento) {
         super(ID, nome, email, senha, CPF, telefone, sexo, nascimento);
         
     }
-
-        
       
     public Medico(long ID, String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento, long IDEspecialidade) {
         super(ID, nome, email, senha, CPF, telefone, sexo, nascimento);
