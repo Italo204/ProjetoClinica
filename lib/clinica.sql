@@ -39,7 +39,7 @@ CREATE TABLE `agendamento` (
   CONSTRAINT `agendamento_convenio` FOREIGN KEY (`IDConvenio`) REFERENCES `convenio` (`IDConvenio`),
   CONSTRAINT `agendamento_ibfk_1` FOREIGN KEY (`IDPaciente`) REFERENCES `paciente` (`IDPaciente`),
   CONSTRAINT `fk_agendamento_medico` FOREIGN KEY (`IDMedico`) REFERENCES `medico` (`IDMedico`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `agendamento` (
 
 LOCK TABLES `agendamento` WRITE;
 /*!40000 ALTER TABLE `agendamento` DISABLE KEYS */;
-INSERT INTO `agendamento` VALUES (4,1,2,'2024-03-03','Particular','','15:00:00',NULL,'otorrinolaringologista');
+INSERT INTO `agendamento` VALUES (4,1,2,'2024-03-03','Particular','','15:00:00',NULL,'otorrinolaringologista'),(5,2,2,'2024-11-24','Particular','','11:00:00',NULL,'otorrinolaringologista');
 /*!40000 ALTER TABLE `agendamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `atendente` (
   UNIQUE KEY `CPF` (`CPF`),
   UNIQUE KEY `IDAtendente_2` (`IDAtendente`),
   UNIQUE KEY `senha` (`senha`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,26 +99,6 @@ AFTER INSERT
 ON ATENDENTE FOR EACH ROW
 INSERT INTO LOGIN (CPF, senha, cargo)
 VALUES(NEW.CPF, NEW.senha, 'Atendente') */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`clinica`@`localhost`*/ /*!50003 TRIGGER nome_usuarios_atendente
-AFTER INSERT ON atendente
-FOR EACH ROW
-BEGIN
-    INSERT INTO usuarios (nome) VALUES (NEW.nome);
-END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -193,7 +173,7 @@ CREATE TABLE `login` (
   UNIQUE KEY `IDLOGIN` (`IDLOGIN`),
   UNIQUE KEY `IDLOGIN_2` (`IDLOGIN`),
   UNIQUE KEY `senha` (`SENHA`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +182,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'12345678900','senha123','Medico');
+INSERT INTO `login` VALUES (1,'12345678900','senha123','Medico'),(8,'98765432102','$2a$10$w0OxhZN8AMC9SOnEcIS/9uDLmkWNCZwcwjBMrcAXWRdsaET64ceQS','Medico');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +213,7 @@ CREATE TABLE `medico` (
   KEY `FK_MEDICO_ESPECIALIDADE` (`IDEspecialidade`),
   CONSTRAINT `FK_MEDICO_ESPECIALIDADE` FOREIGN KEY (`IDEspecialidade`) REFERENCES `especialidade` (`IDEspecialidade`),
   CONSTRAINT `fk_medico_agendamento` FOREIGN KEY (`IDAgendamento`) REFERENCES `agendamento` (`IDAgendamento`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +222,7 @@ CREATE TABLE `medico` (
 
 LOCK TABLES `medico` WRITE;
 /*!40000 ALTER TABLE `medico` DISABLE KEYS */;
-INSERT INTO `medico` VALUES (2,NULL,'+55 11 987654321','12345678900','M','medico@example.com','João Silva','senha123','1980-05-15',1);
+INSERT INTO `medico` VALUES (2,NULL,'+55 11 987654321','12345678900','M','medico@example.com','João Silva','senha123','1980-05-15',1),(4,NULL,'341561245','98765432102','M','bruno@example.com','bruno','$2a$10$w0OxhZN8AMC9SOnEcIS/9uDLmkWNCZwcwjBMrcAXWRdsaET64ceQS','1987-12-02',1);
 /*!40000 ALTER TABLE `medico` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -259,26 +239,6 @@ AFTER INSERT
 ON MEDICO FOR EACH ROW
 INSERT INTO LOGIN (CPF, senha, cargo)
 VALUES(NEW.CPF, NEW.senha, 'Medico') */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`clinica`@`localhost`*/ /*!50003 TRIGGER nome_usuarios_medico
-AFTER INSERT ON medico
-FOR EACH ROW
-BEGIN
-    INSERT INTO usuarios (nome) VALUES (NEW.nome);
-END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -309,7 +269,7 @@ CREATE TABLE `paciente` (
   KEY `IDConvenio` (`IDConvenio`),
   CONSTRAINT `paciente_ibfk_1` FOREIGN KEY (`IDProntuario`) REFERENCES `prontuario` (`IDProntuario`),
   CONSTRAINT `paciente_ibfk_2` FOREIGN KEY (`IDConvenio`) REFERENCES `convenio` (`IDConvenio`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,7 +278,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (1,'(34)98888-7891','98765432109','M','carlos.oliveira@example.com','Carlos Oliveira','1985-09-25',NULL,NULL);
+INSERT INTO `paciente` VALUES (1,'(34)98888-7891','98765432109','M','carlos.oliveira@example.com','Carlos Oliveira','1985-09-25',NULL,NULL),(2,'948756121','45678912301','M','Driele@example.com','Driele','1987-11-20',NULL,NULL);
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,4 +317,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-14 17:32:36
+-- Dump completed on 2023-12-14 19:51:30
