@@ -38,6 +38,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -45,12 +49,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imagens/clinica-medica menuprincipal.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         jLabel1.setAutoscrolls(true);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-540, -40, 1910, 1060));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-700, 0, 1960, 580));
 
         jMenu1.setText("Atualizações");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imagens/cliente-icon.png"))); // NOI18N
-        jMenuItem1.setText("Cliente");
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente-icon.png"))); // NOI18N
+        jMenuItem1.setText("Paciente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -58,7 +62,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imagens/usuario-icon.png"))); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/usuario-icon.png"))); // NOI18N
         jMenuItem2.setText("Usuário");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +71,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imagens/medicoIcon.png"))); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/medicoIcon.png"))); // NOI18N
         jMenuItem3.setText("Médico");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +80,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imagens/convenio.png"))); // NOI18N
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/convenio.png"))); // NOI18N
         jMenuItem4.setText("Convênio");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +111,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Cadastro");
         jMenuBar1.add(jMenu2);
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente-icon.png"))); // NOI18N
+        jMenuItem7.setText("Paciente");
+
+        jMenu2.add(jMenuItem7);
+
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/usuario-icon.png"))); // NOI18N
+        jMenuItem8.setText("Usuário");
+        
+        jMenu2.add(jMenuItem8);
+        
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/medicoIcon.png"))); // NOI18N
+        jMenuItem9.setText("Médico");
+
+        jMenu2.add(jMenuItem9);
+
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/convenio.png"))); // NOI18N
+        jMenuItem10.setText("Convênio");
+
+        jMenu2.add(jMenuItem10);
+
         jMenu4.setText("Prontuario");
 
         jMenuItem6.setText("Criar Prontuario");
@@ -130,6 +154,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
       // TODO add your handling code here:
     }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new CadastroCliente().setVisible(true);      // TODO add your handling code here:
+    }
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new CadastroUsuario1().setVisible(true);      // TODO add your handling code here:
+    }
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new CadastroMedico().setVisible(true);      // TODO add your handling code here:
+    }
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new CadastroConvenio().setVisible(true);      // TODO add your handling code here:
+    }
+
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         new AgendamentoTela().setVisible(true);        // TODO add your handling code here:
@@ -174,5 +215,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItem10;
     // End of variables declaration//GEN-END:variables
 }

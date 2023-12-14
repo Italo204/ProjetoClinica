@@ -12,7 +12,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/View/imagens/cliente-icon.png"/>
+                  <Image iconType="3" name="/imagens/cliente-icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cliente"/>
               </Properties>
@@ -23,7 +23,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/View/imagens/usuario-icon.png"/>
+                  <Image iconType="3" name="/imagens/usuario-icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
               </Properties>
@@ -34,7 +34,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/View/imagens/medicoIcon.png"/>
+                  <Image iconType="3" name="/imagens/medicoIcon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="M&#xe9;dico"/>
               </Properties>
@@ -45,7 +45,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/View/imagens/convenio.png"/>
+                  <Image iconType="3" name="/imagens/convenio.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Conv&#xea;nio"/>
               </Properties>
@@ -126,17 +126,15 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/View/imagens/clinica-medica menuprincipal.jpg"/>
+          <Image iconType="3" name="/imagens/clinica-medica menuprincipal.jpg"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
-        <Property name="autoscrolls" type="boolean" value="true"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="-540" y="-40" width="1910" height="1060"/>
+          <AbsoluteConstraints x="-700" y="0" width="1960" height="580"/>
         </Constraint>
       </Constraints>
     </Component>
