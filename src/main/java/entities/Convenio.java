@@ -18,6 +18,15 @@ public class Convenio {
         this.CNPJ = CNPJ;
     }
 
+    public Convenio(String nome, LocalDate dataInicio, LocalDate dataTermino, String CNPJ) {
+        this.nome = nome;
+        this.dataInicio = dataInicio;
+        this.dataTermino = dataTermino;
+        this.CNPJ = CNPJ;
+    }
+    
+    
+
     
     public void setID(long iD) {
         ID = iD;

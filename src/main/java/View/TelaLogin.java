@@ -5,7 +5,7 @@
 package View;
 
 import javax.swing.JFormattedTextField;
-import javax.swing.event.MenuKeyEvent;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 import controller.LoginController;
@@ -32,10 +32,9 @@ public class TelaLogin extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        UserTextField = new javax.swing.JFormattedTextField();
         ButtonEntrar = new javax.swing.JButton();
         UserPassword = new javax.swing.JPasswordField();
-        UserTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -45,6 +44,12 @@ public class TelaLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        UserTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actionPerformed(evt);
+            }
+        });
+        getContentPane().add(UserTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, -1));
         ButtonEntrar.setBackground(new java.awt.Color(0, 153, 0));
         ButtonEntrar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         ButtonEntrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -56,8 +61,6 @@ public class TelaLogin extends javax.swing.JFrame {
         });
         getContentPane().add(ButtonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 100, 60));
         getContentPane().add(UserPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 180, -1));
-
-        
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -75,6 +78,7 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, 100));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 290, 240));
 
+        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/TelaLogin1.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-200, -10, 670, 370));
 
@@ -86,11 +90,8 @@ public class TelaLogin extends javax.swing.JFrame {
             MaskFormatter mask = new MaskFormatter("###.###.###-##");
             
 
-            UserTextField = new JFormattedTextField(mask);
+            mask.install(UserTextField);
             UserTextField.setColumns(14);
-
-            getContentPane().add(UserTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, -1));
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,8 +111,10 @@ public class TelaLogin extends javax.swing.JFrame {
             MenuPrincipal menuPrincipal = new MenuPrincipal();
             menuPrincipal.setVisible(true);
             this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "CPF OU SENHA INCORRETOS!", "ERRO", JOptionPane.ERROR_MESSAGE);
             }
-        }       
+        }      
     }//GEN-LAST:event_ButtonEntrarActionPerformed
 
     /**
@@ -153,7 +156,7 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonEntrar;
     private javax.swing.JPasswordField UserPassword;
-    private javax.swing.JTextField UserTextField;
+    private javax.swing.JFormattedTextField UserTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -172,8 +172,20 @@ public class PacienteDAO implements IDatabaseCRUDHash<Paciente>{
             return null;
         } finally {
             Database.closeConnection();
-        }
-
-        
+        }     
     }
+    
+    public long getID(String CPF) throws SQLException {
+        String sql = "SELECT IDPaciente FROM PACIENTE WHERE CPF = ?";
+        try (PreparedStatement ps = Database.getConexao().prepareStatement(sql)) {
+            ps.setString(1, CPF);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getLong("IDPaciente");
+                }
+            }
+        }
+        return -1;
+    }
+    
 }

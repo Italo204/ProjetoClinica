@@ -14,6 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
+
 
 
 /**
@@ -47,9 +52,9 @@ public class AgendamentoTela extends javax.swing.JFrame {
     private void initComponents() {
 
         voltarButton = new javax.swing.JButton();
-        horaTextField = new javax.swing.JTextField();
-        DataTextField = new javax.swing.JTextField();
-        CpfTextField = new javax.swing.JTextField();
+        horaTextField = new javax.swing.JFormattedTextField();
+        DataTextField = new javax.swing.JFormattedTextField();
+        CpfTextField = new javax.swing.JFormattedTextField();
         nomeTextField = new javax.swing.JTextField();
         cbconvenio = new javax.swing.JComboBox();
         cbespecialidade = new javax.swing.JComboBox();
@@ -68,8 +73,7 @@ public class AgendamentoTela extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4Convenio = new javax.swing.JLabel();
-        jLabelHora1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelHora = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -82,9 +86,11 @@ public class AgendamentoTela extends javax.swing.JFrame {
                 voltarButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(voltarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 490, 150, 40));
-        getContentPane().add(DataTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 270, -1));
-        getContentPane().add(nomeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 270, -1));
+        getContentPane().add(voltarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 480, 150, 40));
+        getContentPane().add(horaTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 270, -1));
+        getContentPane().add(DataTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 270, -1));
+        getContentPane().add(CpfTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 270, -1));
+        getContentPane().add(nomeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 270, -1));
 
         cbconvenio.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -95,7 +101,7 @@ public class AgendamentoTela extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        getContentPane().add(cbconvenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 270, -1));
+        getContentPane().add(cbconvenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 270, -1));
 
         cbespecialidade.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -111,10 +117,10 @@ public class AgendamentoTela extends javax.swing.JFrame {
                 cbespecialidadeActionPerformed(evt);
             }
         });
-        getContentPane().add(cbespecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 270, -1));
+        getContentPane().add(cbespecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 270, -1));
 
         cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONVENIO", "PARTICULAR" }));
-        getContentPane().add(cbTipoConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 270, -1));
+        getContentPane().add(cbTipoConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 270, -1));
 
         cbmedico.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -125,7 +131,7 @@ public class AgendamentoTela extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        getContentPane().add(cbmedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, -1));
+        getContentPane().add(cbmedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 270, -1));
 
         JTagenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -148,7 +154,7 @@ public class AgendamentoTela extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(JTagenda);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 460, 670, 200));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 670, 200));
 
         agendarButton.setBackground(new java.awt.Color(51, 255, 51));
         agendarButton.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -159,81 +165,84 @@ public class AgendamentoTela extends javax.swing.JFrame {
                 agendarButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(agendarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 380, 450, 50));
+        getContentPane().add(agendarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 370, 450, 50));
 
         observacaoTextArea.setColumns(20);
         observacaoTextArea.setRows(5);
         jScrollPane1.setViewportView(observacaoTextArea);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 100, 450, 260));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, 450, 260));
 
         TipoConLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         TipoConLabel.setForeground(new java.awt.Color(255, 255, 255));
         TipoConLabel.setText("Tipo Consulta: ");
-        getContentPane().add(TipoConLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
+        getContentPane().add(TipoConLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
         jLabelTipoConsulta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelTipoConsulta.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTipoConsulta.setText("Especialidade:");
-        getContentPane().add(jLabelTipoConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
+        getContentPane().add(jLabelTipoConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         jLabelData.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelData.setForeground(new java.awt.Color(255, 255, 255));
         jLabelData.setText("Data:");
-        getContentPane().add(jLabelData, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, -1));
+        getContentPane().add(jLabelData, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
 
         jLabelCPF.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelCPF.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCPF.setText("CPF:");
-        getContentPane().add(jLabelCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, -1));
+        getContentPane().add(jLabelCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
 
         jLabelMedico.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelMedico.setForeground(new java.awt.Color(255, 255, 255));
         jLabelMedico.setText("Médico:");
-        getContentPane().add(jLabelMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
+        getContentPane().add(jLabelMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Observação:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nome:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         jLabel4Convenio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4Convenio.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4Convenio.setText("Convênio:");
-        getContentPane().add(jLabel4Convenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 410, 80, -1));
+        getContentPane().add(jLabel4Convenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 80, -1));
 
-        jLabelHora1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabelHora1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelHora1.setText("Hora:");
-        getContentPane().add(jLabelHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+        jLabelHora.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelHora.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelHora.setText("Hora:");
+        getContentPane().add(jLabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Agenda");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, -1, -1));
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 1250, 650));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-530, 0, 1880, 760));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Agenda-PainelFundo.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 0, 1250, 650));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Agenda-PainelFundo.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-570, -10, 1810, 670));
+
+        cbTipoConsulta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atualizarComboConvenio();
+            }
+        });
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ShowErrorMessage(String message) {
-        JOptionPane.showMessageDialog(null, message, "ERRO", JOptionPane.WARNING_MESSAGE);
-    }
-
    private void configureTime() {
         try {
             MaskFormatter mask = new MaskFormatter("##:##");
+            MaskFormatter maskDate = new MaskFormatter("##/##/####");
             
-            horaTextField = new JFormattedTextField(mask);
+            mask.install(horaTextField);
             horaTextField.setColumns(5);
-            
-            getContentPane().add(horaTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 270, -1));
+            maskDate.install(DataTextField);
+            DataTextField.setColumns(10);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -244,10 +253,8 @@ public class AgendamentoTela extends javax.swing.JFrame {
             MaskFormatter mask = new MaskFormatter("###.###.###-##");
             
 
-            CpfTextField = new JFormattedTextField(mask);
+            mask.install(CpfTextField);
             CpfTextField.setColumns(14);
-
-             getContentPane().add(CpfTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 270, -1));
 
 
         } catch (Exception e) {
@@ -293,34 +300,64 @@ public class AgendamentoTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbconvenioAncestorAdded
 
+    private void atualizarComboConvenio() {
+        // Desabilita o cbconvenio se "Particular" estiver selecionado em cbTipoConsulta
+        boolean isParticularSelected = cbTipoConsulta.getSelectedItem().equals("PARTICULAR");
+        cbconvenio.setEnabled(!isParticularSelected);
+
+        if(isParticularSelected) {
+            cbconvenio.setSelectedIndex(-1);
+        }
+    }
+    
+    
     private void agendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agendarButtonActionPerformed
         //Somente para cadastro:
         AgendamentoController agendamentoController = new AgendamentoController();
-        if(agendamentoController.checkUser(CpfTextField.getText()) ){
+        if(agendamentoController.checkUser(CpfTextField.getText().replaceAll("[^0-9]", "")) ){
             String tipo = Objects.toString(cbTipoConsulta.getSelectedItem());
-            String convenio = Objects.toString(cbconvenio.getSelectedItem());
+            Convenio convenio = (Convenio) (cbconvenio.getSelectedItem());
             String nome = nomeTextField.getText();
             String CPF = CpfTextField.getText().replaceAll("[^0-9]", "");
-            String especialidade = (String) cbespecialidade.getSelectedItem();
-            String medico = (String) cbmedico.getSelectedItem();
+            PacienteController pacControl = new PacienteController();
+            Paciente paciente = new Paciente();
+            paciente.setID(pacControl.getID(CPF));
+            paciente.setCPF(CPF);
+            Especialidade especialidade = (Especialidade) cbespecialidade.getSelectedItem();
+            Medico medico = (Medico) cbmedico.getSelectedItem();
             String dataNoFormat = DataTextField.getText();
             String horaString = horaTextField.getText();
             String observacao = observacaoTextArea.getText();
             if(observacao.trim().isEmpty()){
                 observacao =  "";
+            } 
+            if("PARTICULAR".equals(tipo)){
+                convenio =  null;
             }
-            DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate data = LocalDate.parse(dataNoFormat, dataFormatter);
-            LocalTime hora = LocalTime.parse(horaString);
             
-            Agendamento agendamento = new Agendamento(data, hora, CPF, observacao, tipo, medico, convenio, nome, especialidade);
+            try {
+            DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate data = LocalDate.parse(dataNoFormat, dataFormatter);
+
+            DateTimeFormatter horaFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime hora = LocalTime.parse(horaString, horaFormatter);
+
+            Agendamento agendamento = new Agendamento(data, hora, paciente, observacao, tipo, medico, convenio, nome, especialidade);
             AgendamentoController agendarControl = new AgendamentoController();
             agendarControl.saveAgendamento(agendamento);
-        
-            //Para adicionar a lista
+
+            // Para adicionar à lista
             DefaultTableModel listAgenda = (DefaultTableModel) JTagenda.getModel();
-            String horaData = dataNoFormat+ " " + horaString;
+            String horaData = data.format(dataFormatter) + " " + hora.format(horaFormatter);
             Object[] dados = {agendamento.getID(), nomeTextField.getText(), medico, horaData};
+            listAgenda.addRow(dados);  // Adicione esta linha para realmente adicionar à tabela
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO: "+e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+
+            
+        } else{
+            JOptionPane.showMessageDialog(null, "Paciente não cadastrado", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_agendarButtonActionPerformed
 
@@ -330,8 +367,8 @@ public class AgendamentoTela extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CpfTextField;
-    private javax.swing.JTextField DataTextField;
+    private javax.swing.JFormattedTextField CpfTextField;
+    private javax.swing.JFormattedTextField DataTextField;
     private javax.swing.JTable JTagenda;
     private javax.swing.JLabel TipoConLabel;
     private javax.swing.JButton agendarButton;
@@ -339,16 +376,15 @@ public class AgendamentoTela extends javax.swing.JFrame {
     private javax.swing.JComboBox cbconvenio;
     private javax.swing.JComboBox cbespecialidade;
     private javax.swing.JComboBox cbmedico;
-    private javax.swing.JTextField horaTextField;
+    private javax.swing.JFormattedTextField horaTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4Convenio;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelCPF;
     private javax.swing.JLabel jLabelData;
-    private javax.swing.JLabel jLabelHora1;
+    private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelMedico;
     private javax.swing.JLabel jLabelTipoConsulta;
     private javax.swing.JScrollPane jScrollPane1;

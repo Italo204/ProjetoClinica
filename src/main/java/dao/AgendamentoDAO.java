@@ -8,6 +8,10 @@ import java.sql.Time;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import entities.Agendamento;
+import entities.Convenio;
+import entities.Especialidade;
+import entities.Medico;
+import entities.Paciente;
 import interfaces.IDatabaseCRUD;
 import utils.Database;
 import java.time.LocalDate;
@@ -16,35 +20,42 @@ import java.time.LocalTime;
 public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
     @Override
     public void save(Agendamento agendamento) throws SQLException {
-        LocalDate DataAgendamento = agendamento.getData();
-        LocalTime horaTime = agendamento.getHora();
-        String sql = "INSERT INTO agendamento(DATA, CPF, OBSERVACAO, TIPOCONSULTA, MEDICO, CONVENIO, NOME, HORA, ESPECIALIDADE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ;";
-        PreparedStatement ps = null;
+    LocalDate dataAgendamento = agendamento.getData();
+    LocalTime horaAgendamento = agendamento.getHora();
+    String sql = "INSERT INTO agendamento(DIA, OBSERVACOES, TIPOCONSULTA, IDMEDICO, IDCONVENIO, HORA, ESPECIALIDADE, IDPaciente) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    PreparedStatement ps = null;
 
-        Date data = Date.valueOf(DataAgendamento);
-        Time hora = Time.valueOf(horaTime);
+    Date data = Date.valueOf(dataAgendamento);
+    Time hora = Time.valueOf(horaAgendamento);
 
-        try{
-            ps = Database.getConexao().prepareStatement(sql.toString());
-            ps.setDate(1, data);
-            ps.setString(2, agendamento.getCPF());
-            ps.setString(3, agendamento.getObservacao());
-            ps.setString(4, agendamento.getTipoConsulta());
-            ps.setString(5, agendamento.getMedico());
-            ps.setString(6, agendamento.getConvenio());
-            ps.setString(7, agendamento.getNome());
-            ps.setTime(8, hora);
-            ps.setString(9, agendamento.getEspecialidade());
+    try {
+        ps = Database.getConexao().prepareStatement(sql);
+        ps.setDate(1, data);
+        ps.setString(2, agendamento.getObservacao());
+        ps.setString(3, agendamento.getTipoConsulta());
+        ps.setLong(4, agendamento.getMedico().getID());
 
-            ps.executeUpdate();
-            ps.close();
-
-        } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            Database.closeConnection();
+        if (agendamento.getConvenio() != null) {
+            ps.setLong(5, agendamento.getConvenio().getID());
+        } else {
+            ps.setNull(5, java.sql.Types.INTEGER);
         }
+
+        ps.setTime(6, hora);
+        ps.setString(7, agendamento.getEspecialidade().getNome());
+        ps.setLong(8, agendamento.getPaciente().getID());
+
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        if (ps != null) {
+            ps.close();
+        }
+        Database.closeConnection();
     }
+}
+
 
     @Override
     public Agendamento search(Long id) throws SQLException {
@@ -63,9 +74,13 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
             ResultSet result = ps.executeQuery();
             Agendamento agendamento = null;
             if (result.next()){
-                agendamento =  new Agendamento(result.getLong("IDAgendamento"), result.getDate("Dia").toLocalDate(), result.getString("CPF"), 
-                result.getString("observacoes"), result.getString("TipoConsulta"), result.getString("NomeMedico"), 
-                result.getString("NomeConvenio"), result.getString("Nome"), result.getTime("hora").toLocalTime(), result.getString("especialidade"));
+                Especialidade especialidade = (Especialidade) result.getObject("especialidade");
+                Medico medico = (Medico) result.getObject("NomeMedico");
+                Convenio convenio = (Convenio) result.getObject("NomeConvenio");
+                Paciente paciente = (Paciente) result.getObject("IDPaciente");
+                agendamento =  new Agendamento(result.getLong("IDAgendamento"), result.getDate("Dia").toLocalDate(), paciente, 
+                result.getString("observacoes"), result.getString("TipoConsulta"), medico, 
+                convenio, result.getString("Nome"), result.getTime("hora").toLocalTime(), especialidade);
             }
             ps.close();
             result.close();
@@ -143,16 +158,16 @@ public class AgendamentoDAO implements IDatabaseCRUD<Agendamento>{
             while (rs.next()) {
                 long id = rs.getLong("id");
                 LocalDate dia = rs.getDate("Dia").toLocalDate();
-                String cpf = rs.getString("CPF");
+                Paciente paciente = (Paciente) rs.getObject("Paciente");
                 String observacao = rs.getString("observacoes");
                 String TipoConsulta = rs.getString("TipoCosnulta");
-                String Medico = rs.getString("Medico");
-                String convenio = rs.getString("Convenio");
+                Medico medico = (Medico) rs.getObject("NomeMedico");
+                Convenio convenio = (Convenio) rs.getObject("NomeConvenio");
                 String nome = rs.getString("Nome");
                 LocalTime hora = rs.getTime("hora").toLocalTime();
-                String especialidade = rs.getString("especialidade");
+                Especialidade especialidade = (Especialidade) rs.getObject("especialidade");
 
-                Agendamento agendamentos = new Agendamento(id, dia, cpf, observacao, TipoConsulta, Medico, convenio, nome, hora, especialidade);
+                Agendamento agendamentos = new Agendamento(id, dia, paciente, observacao, TipoConsulta, medico, convenio, nome, hora, especialidade);
                 agendamento.add(agendamentos);
             }
             ps.close();

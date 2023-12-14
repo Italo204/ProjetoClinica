@@ -26,6 +26,7 @@ public class AtendenteController {
     public void saveAtendente(Atendente atendente){
         try {
             this.atendenteServices.addAtendente(atendente);
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -34,6 +35,7 @@ public class AtendenteController {
     public void updateAtendente(long id, Map<String, Object> atualizacoes) {
         try {
             this.atendenteServices.updateAtendente(id, atualizacoes);
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -42,6 +44,7 @@ public class AtendenteController {
     public void deleteAtendente(Atendente atendente) {
         try {
             this.atendenteServices.deleteAtendente(atendente.getID());
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -21,6 +22,8 @@ public class UpdateCliente extends javax.swing.JFrame {
      */
     public UpdateCliente() {
         initComponents();
+        configureTime();
+        configureCpfField();
     }
 
     /**
@@ -40,16 +43,16 @@ public class UpdateCliente extends javax.swing.JFrame {
         emailTextField = new javax.swing.JTextField();
         cbSexo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        CpfTextField = new javax.swing.JTextField();
+        CpfTextField = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        nascTextField = new javax.swing.JTextField();
+        nascTextField = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         telefoneTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         AtualizarButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("ID:");
 
@@ -198,11 +201,11 @@ public class UpdateCliente extends javax.swing.JFrame {
             atualizacoes.put("Email", emailTextField.getText());
         }
         if(!CpfTextField.getText().isEmpty()) {
-            atualizacoes.put("CPF", CpfTextField.getText());
+            atualizacoes.put("CPF", CpfTextField.getText().replaceAll("[^0-9]", ""));
         }
         if(!nascTextField.getText().isEmpty()){
             String data = nascTextField.getText();
-            DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate nascimento = LocalDate.parse(data, dataFormatter);
             atualizacoes.put("Nascimento", nascimento);
         }
@@ -229,7 +232,29 @@ public class UpdateCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_telefoneTextFieldActionPerformed
 
+    private void configureCpfField(){
+        try {
+            MaskFormatter mask = new MaskFormatter("###.###.###-##");
+            
+
+            mask.install(CpfTextField);
+            CpfTextField.setColumns(14);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
+    private void configureTime() {
+        try {
+            MaskFormatter maskDate = new MaskFormatter("##/##/####");
+            
+            maskDate.install(nascTextField);
+            nascTextField.setColumns(10);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 
     /**
@@ -239,7 +264,7 @@ public class UpdateCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AtualizarButton;
-    private javax.swing.JTextField CpfTextField;
+    private javax.swing.JFormattedTextField CpfTextField;
     private javax.swing.JComboBox<String> cbSexo;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField idTextField;
@@ -251,7 +276,7 @@ public class UpdateCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField nascTextField;
+    private javax.swing.JFormattedTextField nascTextField;
     private javax.swing.JTextField nomeTextField;
     private javax.swing.JTextField telefoneTextField;
     // End of variables declaration//GEN-END:variables

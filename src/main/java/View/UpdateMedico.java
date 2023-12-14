@@ -8,12 +8,12 @@ import controller.EspecialidadeComboBox;
 import controller.EspecialidadeController;
 import controller.MedicoController;
 import entities.Especialidade;
-import entities.Medico;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.text.MaskFormatter;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -28,6 +28,8 @@ public class UpdateMedico extends javax.swing.JFrame {
      */
     public UpdateMedico() {
         initComponents();
+        configureCpfField();
+        configureTime();
     }
 
     /**
@@ -46,9 +48,9 @@ public class UpdateMedico extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         emailTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        CPFTextField = new javax.swing.JTextField();
+        CPFTextField = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        NascimentoTextField = new javax.swing.JTextField();
+        NascimentoTextField = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         AtualizarButton = new javax.swing.JButton();
@@ -60,7 +62,7 @@ public class UpdateMedico extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         TelefoneTextField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("ID:");
 
@@ -246,10 +248,10 @@ public class UpdateMedico extends javax.swing.JFrame {
             atualizacoes.put("Senha", senha);
         }
         if(!CPFTextField.getText().isEmpty()) {
-            atualizacoes.put("CPF", CPFTextField.getText());
+            atualizacoes.put("CPF", CPFTextField.getText().replaceAll("[^0-9]", ""));
         }
         if(!NascimentoTextField.getText().isEmpty()) {
-            DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String data = NascimentoTextField.getText();
             LocalDate nascimento = LocalDate.parse(data, dataFormatter);
             atualizacoes.put("Nascimento", nascimento);
@@ -289,6 +291,30 @@ public class UpdateMedico extends javax.swing.JFrame {
             }
             return genero;
     }
+   
+       private void configureCpfField(){
+        try {
+            MaskFormatter mask = new MaskFormatter("###.###.###-##");
+            
+
+            mask.install(CPFTextField);
+            CPFTextField.setColumns(14);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void configureTime() {
+        try {
+            MaskFormatter maskDate = new MaskFormatter("##/##/####");
+            
+            maskDate.install(NascimentoTextField);
+            NascimentoTextField.setColumns(10);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -296,9 +322,9 @@ public class UpdateMedico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AtualizarButton;
-    private javax.swing.JTextField CPFTextField;
+    private javax.swing.JFormattedTextField CPFTextField;
     private javax.swing.JTextField IDtextField;
-    private javax.swing.JTextField NascimentoTextField;
+    private javax.swing.JFormattedTextField NascimentoTextField;
     private javax.swing.JTextField NomeTextField;
     private javax.swing.JTextField SenhaTextField;
     private javax.swing.JTextField TelefoneTextField;

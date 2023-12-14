@@ -63,4 +63,13 @@ public class PacienteController {
             return null;
         }
     }
+    
+    public long getID(String CPF) {
+        try {
+            return this.pacienteServices.getID(CPF);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+    }
 }

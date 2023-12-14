@@ -31,6 +31,7 @@ CREATE TABLE `agendamento` (
   `observacoes` varchar(255) DEFAULT NULL,
   `hora` time NOT NULL,
   `IDConvenio` int(11) DEFAULT NULL,
+  `especialidade` varchar(70) NOT NULL,
   PRIMARY KEY (`IDAgendamento`),
   KEY `IDPaciente` (`IDPaciente`),
   KEY `fk_agendamento_medico` (`IDMedico`),
@@ -38,7 +39,7 @@ CREATE TABLE `agendamento` (
   CONSTRAINT `agendamento_convenio` FOREIGN KEY (`IDConvenio`) REFERENCES `convenio` (`IDConvenio`),
   CONSTRAINT `agendamento_ibfk_1` FOREIGN KEY (`IDPaciente`) REFERENCES `paciente` (`IDPaciente`),
   CONSTRAINT `fk_agendamento_medico` FOREIGN KEY (`IDMedico`) REFERENCES `medico` (`IDMedico`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +48,7 @@ CREATE TABLE `agendamento` (
 
 LOCK TABLES `agendamento` WRITE;
 /*!40000 ALTER TABLE `agendamento` DISABLE KEYS */;
+INSERT INTO `agendamento` VALUES (4,1,2,'2024-03-03','Particular','','15:00:00',NULL,'otorrinolaringologista');
 /*!40000 ALTER TABLE `agendamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,20 +60,21 @@ DROP TABLE IF EXISTS `atendente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `atendente` (
-  `IDAtendente` int(11) NOT NULL,
+  `IDAtendente` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `senha` varchar(70) DEFAULT NULL,
   `CPF` varchar(11) NOT NULL,
-  `telefone` varchar(9) NOT NULL,
+  `TELEFONE` varchar(20) DEFAULT NULL,
   `sexo` enum('M','F') NOT NULL,
   `nascimento` date NOT NULL,
   PRIMARY KEY (`IDAtendente`),
   UNIQUE KEY `IDAtendente` (`IDAtendente`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `CPF` (`CPF`),
+  UNIQUE KEY `IDAtendente_2` (`IDAtendente`),
   UNIQUE KEY `senha` (`senha`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,56 +124,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
--- Table structure for table `cargo_permissao`
---
-
-DROP TABLE IF EXISTS `cargo_permissao`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cargo_permissao` (
-  `cargo_id` int(11) NOT NULL,
-  `permissao_id` int(11) NOT NULL,
-  PRIMARY KEY (`cargo_id`,`permissao_id`),
-  KEY `permissao_id` (`permissao_id`),
-  CONSTRAINT `cargo_permissao_ibfk_1` FOREIGN KEY (`cargo_id`) REFERENCES `cargos` (`ID`),
-  CONSTRAINT `cargo_permissao_ibfk_2` FOREIGN KEY (`permissao_id`) REFERENCES `permissoes` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cargo_permissao`
---
-
-LOCK TABLES `cargo_permissao` WRITE;
-/*!40000 ALTER TABLE `cargo_permissao` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cargo_permissao` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `cargos`
---
-
-DROP TABLE IF EXISTS `cargos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cargos` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `ID` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cargos`
---
-
-LOCK TABLES `cargos` WRITE;
-/*!40000 ALTER TABLE `cargos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cargos` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `convenio`
@@ -231,15 +184,16 @@ DROP TABLE IF EXISTS `login`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `login` (
-  `IDLOGIN` int(11) NOT NULL,
+  `IDLOGIN` int(11) NOT NULL AUTO_INCREMENT,
   `CPF` varchar(11) NOT NULL,
   `SENHA` varchar(70) DEFAULT NULL,
   `CARGO` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`IDLOGIN`),
   UNIQUE KEY `CPF` (`CPF`),
   UNIQUE KEY `IDLOGIN` (`IDLOGIN`),
+  UNIQUE KEY `IDLOGIN_2` (`IDLOGIN`),
   UNIQUE KEY `senha` (`SENHA`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,7 +216,7 @@ DROP TABLE IF EXISTS `medico`;
 CREATE TABLE `medico` (
   `IDMedico` int(11) NOT NULL AUTO_INCREMENT,
   `IDAgendamento` int(11) DEFAULT NULL,
-  `telefone` varchar(20) DEFAULT NULL,
+  `TELEFONE` varchar(20) DEFAULT NULL,
   `CPF` varchar(11) NOT NULL,
   `Sexo` enum('M','F') NOT NULL,
   `Email` varchar(150) NOT NULL,
@@ -279,7 +233,7 @@ CREATE TABLE `medico` (
   KEY `FK_MEDICO_ESPECIALIDADE` (`IDEspecialidade`),
   CONSTRAINT `FK_MEDICO_ESPECIALIDADE` FOREIGN KEY (`IDEspecialidade`) REFERENCES `especialidade` (`IDEspecialidade`),
   CONSTRAINT `fk_medico_agendamento` FOREIGN KEY (`IDAgendamento`) REFERENCES `agendamento` (`IDAgendamento`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,7 +294,7 @@ DROP TABLE IF EXISTS `paciente`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `paciente` (
   `IDPaciente` int(11) NOT NULL AUTO_INCREMENT,
-  `Telefone` varchar(9) NOT NULL,
+  `TELEFONE` varchar(20) DEFAULT NULL,
   `CPF` varchar(11) NOT NULL,
   `Sexo` enum('M','F') NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -355,7 +309,7 @@ CREATE TABLE `paciente` (
   KEY `IDConvenio` (`IDConvenio`),
   CONSTRAINT `paciente_ibfk_1` FOREIGN KEY (`IDProntuario`) REFERENCES `prontuario` (`IDProntuario`),
   CONSTRAINT `paciente_ibfk_2` FOREIGN KEY (`IDConvenio`) REFERENCES `convenio` (`IDConvenio`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -364,31 +318,8 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
+INSERT INTO `paciente` VALUES (1,'(34)98888-7891','98765432109','M','carlos.oliveira@example.com','Carlos Oliveira','1985-09-25',NULL,NULL);
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `permissoes`
---
-
-DROP TABLE IF EXISTS `permissoes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `permissoes` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `ID` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `permissoes`
---
-
-LOCK TABLES `permissoes` WRITE;
-/*!40000 ALTER TABLE `permissoes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `permissoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -416,59 +347,6 @@ LOCK TABLES `prontuario` WRITE;
 /*!40000 ALTER TABLE `prontuario` DISABLE KEYS */;
 /*!40000 ALTER TABLE `prontuario` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `usuario_cargo`
---
-
-DROP TABLE IF EXISTS `usuario_cargo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuario_cargo` (
-  `usuario_id` int(11) NOT NULL,
-  `cargo_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`usuario_id`),
-  KEY `cargo_id` (`cargo_id`),
-  CONSTRAINT `usuario_cargo_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`ID`),
-  CONSTRAINT `usuario_cargo_ibfk_2` FOREIGN KEY (`cargo_id`) REFERENCES `cargos` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuario_cargo`
---
-
-LOCK TABLES `usuario_cargo` WRITE;
-/*!40000 ALTER TABLE `usuario_cargo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuario_cargo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `usuarios`
---
-
-DROP TABLE IF EXISTS `usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `cargo_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `ID` (`ID`),
-  KEY `cargo_id` (`cargo_id`),
-  CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`cargo_id`) REFERENCES `cargos` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuarios`
---
-
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -479,4 +357,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-11 14:37:08
+-- Dump completed on 2023-12-14 17:32:36

@@ -22,6 +22,11 @@ public abstract class Pessoa {
         this.sexo = sexo;
         this.nascimento = nascimento;
     }
+
+    public Pessoa() {
+    }
+    
+    
     
     public Pessoa(String nome, String email, String senha, String CPF, String telefone, String sexo, LocalDate nascimento) {
         this.nome = nome;

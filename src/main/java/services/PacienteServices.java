@@ -40,5 +40,9 @@ public class PacienteServices{
     public ArrayList<Paciente> findAllPaciente() throws SQLException {
         return this.PacienteDAO.findAll();
     }
+    
+    public long getID(String CPF) throws SQLException {
+        return this.PacienteDAO.getID(CPF);
+    }
 
 }

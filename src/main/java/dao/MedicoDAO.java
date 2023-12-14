@@ -26,7 +26,7 @@ public class MedicoDAO implements IDatabaseCRUDMedico<Medico>{
     public void save(Medico medico) throws SQLException {
         LocalDate dataNas = medico.getNascimento();
         
-        String sql = "INSERT INTO MEDICO(NOME, EMAIL, SENHA, CPF, TELEFONE, SEXO, NASCIMENTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO MEDICO(NOME, EMAIL, SENHA, CPF, TELEFONE, SEXO, NASCIMENTO, IDEspecialidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
        
         Date nascimento = Date.valueOf(dataNas);
@@ -40,6 +40,7 @@ public class MedicoDAO implements IDatabaseCRUDMedico<Medico>{
             ps.setString(5, medico.getTelefone());
             ps.setString(6, medico.getSexo());
             ps.setDate(7, nascimento);
+            ps.setLong(8, medico.getIDEspecialidade());
 
             ps.executeUpdate();
             ps.close();

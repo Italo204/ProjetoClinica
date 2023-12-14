@@ -17,6 +17,7 @@ public class ConvenioController {
     public void addConvenio(Convenio convenio) {
         try {
             this.convenioServices.addConvenio(convenio);
+            JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "CADASTRO", JOptionPane.INFORMATION_MESSAGE);
         }catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -25,6 +26,7 @@ public class ConvenioController {
     public void deleteConvenio(Convenio convenio) {
         try {
             this.convenioServices.deleteConvenio(convenio.getID());
+            JOptionPane.showMessageDialog(null, "Excluido com sucesso!", "EXCLUSÃO", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -41,6 +43,7 @@ public class ConvenioController {
     public void updateConvenio(Convenio convenio) {
         try {
             this.convenioServices.updateConvenio(convenio);
+            JOptionPane.showMessageDialog(null, "Atualizacão feita com sucesso!", "ATUALIZAÇÃO", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }

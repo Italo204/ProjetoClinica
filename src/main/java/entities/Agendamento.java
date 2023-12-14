@@ -7,16 +7,16 @@ public class Agendamento {
     private long ID;
     private LocalDate Data;
     private LocalTime hora;
-    private String CPF;
+    private Paciente CPF;
     private String Observacao;
     private String tipoConsulta;
-    private String medico;
-    private String convenio;
+    private Medico medico;
+    private Convenio convenio;
     private String nome;
-    private String especialidade;
+    private Especialidade especialidade;
 
-    public Agendamento(long ID, LocalDate data, String CPF, String observacao, String tipoConsulta, String medico,
-            String convenio, String nome, LocalTime hora, String especialidade) {
+    public Agendamento(long ID, LocalDate data, Paciente CPF, String observacao, String tipoConsulta, Medico medico,
+            Convenio convenio, String nome, LocalTime hora, Especialidade especialidade) {
         this.Data = data;
         this.CPF = CPF;
         this.Observacao = observacao;
@@ -31,8 +31,8 @@ public class Agendamento {
 
     
 
-    public Agendamento(LocalDate data, LocalTime hora, String CPF, String observacao, String tipoConsulta,
-            String medico, String convenio, String nome, String especialidade) {
+    public Agendamento(LocalDate data, LocalTime hora, Paciente CPF, String observacao, String tipoConsulta,
+            Medico medico, Convenio convenio, String nome, Especialidade especialidade) {
         this.Data = data;
         this.hora = hora;
         this.CPF = CPF;
@@ -54,11 +54,11 @@ public class Agendamento {
         this.ID = iD;
     }
 
-    public String getEspecialidade() {
+    public Especialidade getEspecialidade() {
         return especialidade;
     }
 
-    public void setEspecialidade(String especialidade) {
+    public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
     }
 
@@ -70,11 +70,11 @@ public class Agendamento {
         this.Data = data;
     }
 
-    public String getCPF() {
+    public Paciente getPaciente() {
         return CPF;
     }
 
-    public void setCPF(String cPF) {
+    public void setPaciente(Paciente cPF) {
         this.CPF = cPF;
     }
 
@@ -94,19 +94,19 @@ public class Agendamento {
         this.tipoConsulta = tipoConsulta;
     }
 
-    public String getMedico() {
+    public Medico getMedico() {
         return medico;
     }
 
-    public void setMedico(String medico) {
+    public void setMedico(Medico medico) {
         this.medico = medico;
     }
 
-    public String getConvenio() {
+    public Convenio getConvenio() {
         return convenio;
     }
 
-    public void setConvenio(String convenio) {
+    public void setConvenio(Convenio convenio) {
         this.convenio = convenio;
     }
 

@@ -12,6 +12,10 @@ import java.time.LocalDate;
 
  
 public class Paciente extends Pessoa{
+    
+    public Paciente (){
+    
+    }
 
     public Paciente(long ID, String nome, String email, String CPF, String telefone, String sexo,
             LocalDate nascimento) {

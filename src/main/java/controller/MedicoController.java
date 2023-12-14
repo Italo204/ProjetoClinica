@@ -25,6 +25,8 @@ public class MedicoController {
     public void saveMedico(Medico medico) {
         try{
             this.medicoServices.addMedico(medico);
+            
+
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -33,6 +35,7 @@ public class MedicoController {
     public void updateMedico(long id, Map<String, Object> atualizacoes){
         try {
             this.medicoServices.updateMedico(id, atualizacoes);
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -41,6 +44,7 @@ public class MedicoController {
     public void deleteMedico(Medico medico) {
         try {
             this.medicoServices.deleteMedico(medico.getID());
+            
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }

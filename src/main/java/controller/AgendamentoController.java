@@ -18,6 +18,7 @@ public class AgendamentoController {
     public void saveAgendamento(Agendamento agendamento) {
         try {
             this.agendamentoServices.addAgendamento(agendamento);
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -26,6 +27,7 @@ public class AgendamentoController {
     public void updateAgendamento(Agendamento agendamento) {
         try {
             this.agendamentoServices.updateAgendamento(agendamento);
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -42,6 +44,7 @@ public class AgendamentoController {
     public void deleteAgendamento(Agendamento agendamento) {
         try {
             this.agendamentoServices.deleteAgendamento(agendamento.getID());
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }

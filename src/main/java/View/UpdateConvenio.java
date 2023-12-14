@@ -8,6 +8,7 @@ import controller.ConvenioController;
 import entities.Convenio;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -20,6 +21,8 @@ public class UpdateConvenio extends javax.swing.JFrame {
      */
     public UpdateConvenio() {
         initComponents();
+        configureCnpjField();
+        configureTime();
     }
 
     /**
@@ -36,15 +39,15 @@ public class UpdateConvenio extends javax.swing.JFrame {
         IDField = new javax.swing.JTextField();
         NomeField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        CNPJField = new javax.swing.JTextField();
+        CNPJField = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        DataInicioField = new javax.swing.JTextField();
+        DataInicioField = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         AtualizarButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        DataTerminoField = new javax.swing.JTextField();
+        DataTerminoField = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("ID:");
 
@@ -162,7 +165,7 @@ public class UpdateConvenio extends javax.swing.JFrame {
         String CNPJ = CNPJField.getText();
         String dataInicioNoFormat = DataInicioField.getText();
         String dataTerminoNoFormat = DataTerminoField.getText();
-        DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataInicio = LocalDate.parse(dataInicioNoFormat, dataFormatter);
         LocalDate dataTermino = LocalDate.parse(dataTerminoNoFormat, dataFormatter);
         
@@ -172,6 +175,32 @@ public class UpdateConvenio extends javax.swing.JFrame {
         conControl.updateConvenio(convenio);
     }//GEN-LAST:event_AtualizarButtonActionPerformed
 
+    private void configureCnpjField(){
+        try {
+            MaskFormatter mask = new MaskFormatter("##.###.###/####-##");
+            
+
+            mask.install(CNPJField);
+            CNPJField.setColumns(18);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    private void configureTime() {
+        try {
+            MaskFormatter maskDate = new MaskFormatter("##/##/####");
+            
+            maskDate.install(DataInicioField);
+            DataInicioField.setColumns(10);
+            maskDate.install(DataTerminoField);
+            DataTerminoField.setColumns(10);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 
     /**
@@ -181,9 +210,9 @@ public class UpdateConvenio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AtualizarButton;
-    private javax.swing.JTextField CNPJField;
-    private javax.swing.JTextField DataInicioField;
-    private javax.swing.JTextField DataTerminoField;
+    private javax.swing.JFormattedTextField CNPJField;
+    private javax.swing.JFormattedTextField DataInicioField;
+    private javax.swing.JFormattedTextField DataTerminoField;
     private javax.swing.JTextField IDField;
     private javax.swing.JTextField NomeField;
     private javax.swing.JLabel jLabel1;
